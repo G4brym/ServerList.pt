@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="G4brym">
+
+	<title>{{$title}}</title>
+
+	<!-- SweetAlert -->
+	{{ HTML::script(URL::to('/resources/sweetalert/sweet-alert.js')) }}
+	{{ HTML::style(URL::to('/resources/sweetalert/sweet-alert.css')) }}
+	
+	<!-- Bootstrap Core CSS -->
+	{{ HTML::style(URL::to('/resources/bootstrap/css/bootstrap.css')) }}
+	
+	{{ HTML::style(URL::to('/resources/css/metisMenu.css')) }}
+
+	<!-- Custom CSS -->
+	{{ HTML::style(URL::to('/resources/css/panel.css')) }}
+
+	<!-- Custom Fonts -->
+	{{ HTML::style(URL::to('/resources/font-awesome/css/font-awesome.min.css')) }}
+	
+	@yield('css')
+	
+	@yield('head')
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">{{ settings::get("siteName") }}</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>CSGO - Top MiniGames 1</strong>
+                                        <span class="pull-right text-muted">25/32</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Full</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>GTASA - Best Rollplay</strong>
+                                        <span class="pull-right text-muted">40/100</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Full</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Minecraft - Factions</strong>
+                                        <span class="pull-right text-muted">14/150</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                            <span class="sr-only">10% Full</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Ver Todos Os Servidores</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Editar Perfil</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{{ URL::to('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Terminar Sessão</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+						<li class="divider"></li>
+						<li class="divider"></li>
+                        <li>
+                            <a href="{{ URL::to('/') }}"><i class="fa fa-arrow-circle-o-left"></i> Voltar Ao Site</a>
+                        </li>
+						<li class="divider"></li>
+						<li class="divider"></li>
+                        <li class="active">
+                            <a href="{{ URL::to('/panel') }}"><i class="fa fa-dashboard fa-fw"></i> Início</a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::to('/panel/servers') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Servidores<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ URL::to('/panel/servers/new') }}">Adicionar Servidor</a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::to('/panel/servers') }}">Gerir Servidores</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+				
+		<!-- Infos -->
+        <noscript>
+		<div class="alert alert-dismissible alert-warning">
+		  <p>Para Poder Navegar Livremente Pelo Site, Têm De Ativar O JavaScript</p>
+		</div>
+		</noscript>
+        @if(Session::has('success'))
+		<div class="alert alert-dismissible alert-success">
+		  <button type="button" class="close" data-dismiss="alert">×</button>
+		  <p>{{ Session::get('success') }}</p>
+		</div>
+        @endif
+        @if($errors->any())
+		<div class="alert alert-dismissible alert-danger">
+		  <button type="button" class="close" data-dismiss="alert">×</button>
+		  <p>{{implode('', $errors->all(':message '))}}</p>
+		</div>
+        @endif
+        <!-- /Infos -->
+				
+				@yield('body')
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+	<!-- jQuery -->
+	{{ HTML::script(URL::to('/resources/js/jquery.js')) }}
+
+	<!-- Bootstrap Core JavaScript -->
+	{{ HTML::script(URL::to('/resources/bootstrap/js/bootstrap.min.js')) }}
+	{{ HTML::script(URL::to('/resources/js/jqBootstrapValidation.js')) }}
+	
+	{{ HTML::script(URL::to('/resources/js/metisMenu.js')) }}
+	
+	{{ HTML::script(URL::to('/resources/js/panel.js')) }}
+	
+	@yield('js')
+
+</body>
+
+</html>
