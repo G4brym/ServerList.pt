@@ -125,10 +125,12 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Editar Perfil</a>
+                        <li>
+							<a href="{{ URL::to('/user') }}"><i class="fa fa-user fa-fw"></i> Editar Perfil</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="{{ URL::to('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Terminar Sessão</a>
+                        <li>
+							<a href="{{ URL::to('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Terminar Sessão</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -142,12 +144,12 @@
                     <ul class="nav" id="side-menu">
 						<li class="divider"></li>
 						<li class="divider"></li>
-                        <li>
+                        <li class="active">
                             <a href="{{ URL::to('/') }}"><i class="fa fa-arrow-circle-o-left"></i> Voltar Ao Site</a>
                         </li>
 						<li class="divider"></li>
 						<li class="divider"></li>
-                        <li class="active">
+                        <li>
                             <a href="{{ URL::to('/panel') }}"><i class="fa fa-dashboard fa-fw"></i> Início</a>
                         </li>
                         <li>

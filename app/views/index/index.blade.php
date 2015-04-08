@@ -22,74 +22,58 @@
 	</header>
 @stop
 @section('body')
-<?php
-	$status = new mcservers();
-	$response = $status->getStatus('mc.portugalfunmaps.org', 25565);
-	if(!$response) {
-		echo"The Server is offline!";
-	} else {
-		echo"<img width=\"64\" height=\"64\" src=\"".$response['favicon']."\" /> <br>
-		The Server ".$response['hostname']." is running on ".$response['version']." and is online,
-		currently are ".$response['players']." players online
-		of a maximum of ".$response['maxplayers'].". The motd of the server is '".$response['motd']."'. 
-		The server has a ping of ".$response['ping']." milliseconds.<br><br>";
-		var_dump($response);
-	}
-	
-?>
 		<div class="row">
 			<div class="col-md-4">
-				<div class="panel panel-default">
+				<div class="panel panel-default" style="height: 155px;">
 					<div class="panel-heading">
 						<h4><i class="fa fa-fw fa-check"></i> 100% Português</h4>
 					</div>
 					<div class="panel-body">
 						<p>Feito por portugueses para os portugueses.</p>
-						<a href="#" class="btn btn-info">Forum</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="panel panel-default">
+				<div class="panel panel-default" style="height: 155px;">
 					<div class="panel-heading">
 						<h4><i class="fa fa-fw fa-gift"></i> Launcher Proprio</h4>
 					</div>
 					<div class="panel-body">
 						<p>Não tens o Minecraft comprado? <br>Podes agora utilizar o nosso launcher para Minecraft original e crackeado.</p>
-						<a href="#" class="btn btn-info">Sabe Mais Aqui</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="panel panel-default">
+				<div class="panel panel-default" style="height: 155px;">
 					<div class="panel-heading">
 						<h4><i class="fa fa-fw fa-compass"></i> Os Melhores Servidores Tugas</h4>
 					</div>
 					<div class="panel-body">
-						<p>Aqui encontras os melhores servidores tugas em varias plataformas</p>
+						<p>Aqui encontras os melhores servidores tugas em varias plataformas de jogo.</p>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- /.row -->
-
 		<!-- Portfolio Section -->
 		<div class="row">
 			<div class="col-lg-12">
 				<h2 class="page-header">Servidores Disponiveis</h2>
 			</div>
-			<div class="col-md-4 col-sm-6">
-				<a href="portfolio-item.html">
-					<h4><center>Minecraft</center></h4>
-					<img class="img-responsive img-portfolio img-hover" src="{{ URL::to('/resources/images/website/minecraft-thumbnail.jpg') }}" alt="">
-				</a>
-			</div>
-			<div class="col-md-4 col-sm-6">
-				<a href="portfolio-item.html">
-					<h4><center>Counter-Strike: Global Offensive</center></h4>
-					<img class="img-responsive img-portfolio img-hover" src="{{ URL::to('/resources/images/website/csgo-thumbnail.jpg') }}" alt="">
-				</a>
-			</div>
+			<a href="{{ URL::to('/minecraft') }}">
+				<div class="cover-card col-md-4 col-sm-6" style="background: url({{ URL::to('/resources/images/website/minecraft-thumbnail.jpg') }}) no-repeat center top;background-size:cover;">
+					<p>
+						Minecraft
+					</p>
+				</div>
+			</a>
+			<a href="{{ URL::to('/csgo') }}">
+				<div class="cover-card col-md-4 col-sm-6" style="background: url({{ URL::to('/resources/images/website/csgo-thumbnail.jpg') }}) no-repeat center top;background-size:cover;">
+					<p>
+						Counter-Strike: Global Offensive
+					</p>
+				</div>
+			</a>
 		</div>
 		<!-- /.row -->
 
@@ -105,7 +89,8 @@
 					<li>Suporte para as versões mais populares do Minecraft</li>
 					<li>Entre Outras...</li>
 				</ul>
-			</div>
+				<a href="#" class="btn btn-info"><i class="fa fa-windows"></i> Download Windows</a> <a href="#" class="btn btn-info"><i class="fa fa-linux"></i> Download Linux/MAC</a>
+			</div><br>
 			<div class="col-md-6">
 				<img class="img-responsive" src="{{ URL::to('/resources/images/website/launcher.jpg') }}" alt="">
 			</div>

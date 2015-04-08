@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'cutenetwork',
-			'username'  => 'cutenetwork',
-			'password'  => 'DGLJvxRQuuEAZV4D',
+			'database'  => 'ServerListPT',
+			'username'  => 'ServerListPT',
+			'password'  => 'ZDhtNAaxy4PE7Ayy',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

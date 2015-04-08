@@ -53,34 +53,38 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gamepad"></i> Jogos <i class="fa fa-caret-down"></i></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="{{ URL::to('/minecraft') }}">Minecraft</a>
+							</li>
+							<li>
+								<a href="{{ URL::to('/csgo') }}">CSGO</a>
+							</li>
+						</ul>
+					</li>
+					@if(Auth::guest())
 					<li>
-						<a href="about.html">About</a>
+						<a href="{{ URL::to('/login') }}"><i class="fa fa-sign-in"></i> Login/Registar</a>
 					</li>
+					@else
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Jogos <i class="fa fa-caret-down"></i></a>
+						<a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <i class="fa fa-caret-down"></i></a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="blog-home-1.html">Minecraft</a>
+								<a href="{{ URL::to('/user') }}"><i class="fa fa-user"></i> Editar Conta</a>
 							</li>
 							<li>
-								<a href="blog-home-2.html">CSGO</a>
+								<a href="{{ URL::to('/panel') }}"><i class="fa fa-wrench"></i> Painel De Controlo</a>
+							</li>
+							<li role="presentation" class="divider"></li>
+							<li>
+								<a href="{{ URL::to('/logout') }}"><i class="fa fa-sign-out"></i> Terminar Sessão</a>
 							</li>
 						</ul>
 					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="blog-home-1.html">Blog Home 1</a>
-							</li>
-							<li>
-								<a href="blog-home-2.html">Blog Home 2</a>
-							</li>
-							<li>
-								<a href="blog-post.html">Blog Post</a>
-							</li>
-						</ul>
-					</li>
+					@endif
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

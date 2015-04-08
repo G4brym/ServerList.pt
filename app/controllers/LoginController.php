@@ -8,12 +8,6 @@ class LoginController extends BaseController {
 		return View::make('login.login')-> with('title', $title);
 	}
 
-	public function showForgot()
-	{
-		$title=settings::get("siteName") . " - Esqueci-me Da Password";
-		return View::make('login.forgot')->with('title', $title);
-	}
-
 	public function showActivate()
 	{
 		$title=settings::get("siteName") . " - Ativar Conta";
@@ -48,28 +42,29 @@ class LoginController extends BaseController {
 				if(Auth::user()->activated==0)
 				{
 					Auth::logout();
-					return Redirect::to(URL::to("/"))->withErrors('Conta não ativada! Entra no link que te foi enviado para o email.');
+					return Redirect::to(URL::to("/login"))->withErrors('Conta não ativada! Entra no link que te foi enviado para o email.');
 				}
 
 				if(Auth::user()->disabled==1)
 				{
+					$reason = Auth::user()->disabled_reason;
 					Auth::logout();
-					return Redirect::to(URL::to("/"))->withErrors('Esta conta foi desativada, entra em contacto com o suporte através do email support@cutenetwork.com');
+					return Redirect::to(URL::to("/login"))->withErrors('Esta conta foi desativada, Com a seguinte razão '.$reason);
 				}
 
 				DB::table('logs')->insert(
 				    array('logs_action' => 'Login', 'logs_userId' => Auth::user()->id, 'logs_ip' => "inserir mais tarde ip da cloudflare")
 				);
 
-				return Redirect::to(URL::to("/"));
+				return Redirect::to(URL::to("/"))->With('success', 'Sessão Terminada!');
 
 			} else {
 
-				return Redirect::to(URL::to("/"))->withErrors('Login invalido');
+				return Redirect::to(URL::to("/login"))->withErrors('Login invalido');
 
 			}
 		} else {
-			return Redirect::to(URL::to("/"))->withErrors($v);
+			return Redirect::to(URL::to("/login"))->withErrors($v);
 		}
 	}
 
@@ -77,24 +72,20 @@ class LoginController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('regFirstName' => 'required|max:20', 'regLastName' => 'required|max:20', 'regEmail' => 'required|email|max:40', 'regPassword' => 'required|min:6|max:20', 'regSex' => 'required');
+		$rules = array('regName' => 'required|max:40', 'regEmail' => 'required|email|max:40', 'regPassword' => 'required|min:6|max:20');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
 		{
 			
-			if($input['regSex'] != 1 && $input['regSex'] != 2){
-				return Redirect::to(URL::to("/"))->withInput()->WithErrors("Ocorreu Um Erro Com A Validação Do Sexo");
-			}
-			
 			if(count(DB::table('users')->where('email', '=', $input['regEmail'])->first())){
-				return Redirect::to(URL::to("/"))->withInput()->WithErrors("Este Email Já Está Em Uso");
+				return Redirect::to(URL::to("/login"))->withInput()->WithErrors("Este Email já está em uso");
 			}
 				
 			$password = $input['regPassword'];
 			$password = Hash::make($password);
 
-			$data = array('email' => $input['regEmail'], 'firstName' => $input['regFirstName'], 'lastName' => $input['regLastName']);
+			$data = array('email' => $input['regEmail'], 'name' => $input['regtName']);
 
 			//Mail::send('emails.welcome', array('username' => $data['username'], 'code' => $code), function($message) use ($data)
 			//{
@@ -103,16 +94,8 @@ class LoginController extends BaseController {
 
 			$user = new User();
 			$user->email = $input['regEmail'];
-			$user->firstname = $input['regFirstName'];
-			$user->lastname = $input['regLastName'];
+			$user->name = $input['regName'];
 			$user->password = $password;
-			$user->sex = $input['regSex'];
-			$user->activated = 0;
-			$user->activation_token = str_random(30);
-			$user->token = str_random(30);
-			$user->remember_token = null;
-			$user->rank = 10;
-			$user->disabled = 0;
 			$user->save();
 
 			$id = DB::table('users')->where('email', '=', $input['regEmail'])->first();
@@ -120,11 +103,11 @@ class LoginController extends BaseController {
 			    array('logs_action' => 'Register', 'logs_userId' => $id->id, 'logs_ip' => "inserir mais tarde ip da cloudflare")
 			);
 
-			return Redirect::to(URL::to("/"))->With('success', 'Conta criada, Verifica a tua conta com um codigo que foi enviado por Email.');
+			return Redirect::to(URL::to("/login"))->With('success', 'Conta criada, Verifica a tua conta com o link que te foi enviado por Email.');
 
 		} else {
 
-			return Redirect::to(URL::to("/"))->withInput()->WithErrors($v);
+			return Redirect::to(URL::to("/login"))->withInput()->WithErrors($v);
 
 		}
 	}
@@ -145,7 +128,7 @@ class LoginController extends BaseController {
 				$user->activation_token = '';
 				$user->activated = 1;
 				$user->save();
-				return Redirect::to(URL::to('/'))->With('success', 'Conta Ativada, Podes agora fazer Login.');
+				return Redirect::to(URL::to('/'))->With('success', 'Conta ativada, Podes agora fazer Login.');
 					
 				} else {
 					
@@ -181,16 +164,16 @@ class LoginController extends BaseController {
 				
 				//TODO enviar email
 				
-				return Redirect::to(URL::to('/forgot'))->With('success', 'Um Email Foi Enviado Com Um Codigo De Recuperação.');
+				return Redirect::to(URL::to('/login'))->With('success', 'Um Email Foi Enviado Com Um Codigo De Recuperação.');
 
 			} else {
 
 					//email nao foi encontrado
-					return Redirect::to(URL::to('/forgot'))->withInput()->withErrors('Email Não Encontrado.');
+					return Redirect::to(URL::to('/login'))->withInput()->withErrors('Email Não Encontrado.');
 
 			}
 		} else {
-			return Redirect::to(URL::to('/forgot'))->withErrors($v);
+			return Redirect::to(URL::to('/login'))->withErrors($v);
 		}
 	}
 	
