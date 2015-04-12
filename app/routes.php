@@ -26,6 +26,10 @@ App::missing(function($exception)
 //Paginas Publicas
 Route::get('/', 'BaseController@showIndex');
 Route::get('/minecraft', 'BaseController@showMinecraftList');
+Route::get('/csgo', 'BaseController@showCSGOList');
+Route::get('/cron', 'BaseController@cron');
+
+Route::get('user/{id}', 'IndexController@showUser');
 
 //não se pode estar logado para poder ver 
 Route::group(array('before' => 'guest'), function()
@@ -54,14 +58,16 @@ Route::group(array('before' => 'auth'), function()
 	
 	//panel
     Route::get('panel', 'PanelController@showIndex');
+    Route::get('panel/servers', 'PanelController@showServers');
+    Route::get('panel/minecraft/new', 'PanelController@showNewMCServer');
 
 
     //Utilizador
     Route::get('user', 'IndexController@showOwnUser');
-    Route::get('user/{id}', 'IndexController@showUser');
     Route::get('logout', 'LoginController@logout');
 
     //Metodos Post
+	Route::post('newmcserver', array('before'=>'csrf', 'as' => 'newmcserver', 'uses'=>'PanelController@postNewMCServer'));
 });
 
 //Tem de ser admin para poder executar

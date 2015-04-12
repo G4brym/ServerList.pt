@@ -26,5 +26,10 @@ class BaseController extends Controller {
 		$title=settings::get("siteName") . " - Minecraft";
 		return View::make('index.minecraftList')->with('title', $title);
 	}
+	
+	public function cron()
+	{
+		return View::make('index.cron');
+	}
 
 }

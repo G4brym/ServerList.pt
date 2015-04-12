@@ -56,7 +56,7 @@ class LoginController extends BaseController {
 				    array('logs_action' => 'Login', 'logs_userId' => Auth::user()->id, 'logs_ip' => "inserir mais tarde ip da cloudflare")
 				);
 
-				return Redirect::to(URL::to("/"))->With('success', 'Sessão Terminada!');
+				return Redirect::to(URL::to("/"));
 
 			} else {
 

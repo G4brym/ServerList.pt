@@ -58,7 +58,7 @@
 		<!-- Portfolio Section -->
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="page-header">Servidores Disponiveis</h2>
+				<h2 class="page-header">Jogos Disponíveis</h2>
 			</div>
 			<a href="{{ URL::to('/minecraft') }}">
 				<div class="cover-card col-md-4 col-sm-6" style="background: url({{ URL::to('/resources/images/website/minecraft-thumbnail.jpg') }}) no-repeat center top;background-size:cover;">
@@ -67,10 +67,10 @@
 					</p>
 				</div>
 			</a>
-			<a href="{{ URL::to('/csgo') }}">
+			<a>
 				<div class="cover-card col-md-4 col-sm-6" style="background: url({{ URL::to('/resources/images/website/csgo-thumbnail.jpg') }}) no-repeat center top;background-size:cover;">
 					<p>
-						Counter-Strike: Global Offensive
+						Counter-Strike: Global Offensive<br><br><strong>Em Breve</strong>
 					</p>
 				</div>
 			</a>

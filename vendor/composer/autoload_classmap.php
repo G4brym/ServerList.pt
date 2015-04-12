@@ -21,4 +21,8 @@ return array(
     'mcservers' => $baseDir . '/app/libraries/mcservers.php',
     'settings' => $baseDir . '/app/libraries/settings.php',
     'time' => $baseDir . '/app/libraries/time.php',
+    'xPaw\\MinecraftPing' => $baseDir . '/app/libraries/MinecraftPing.php',
+    'xPaw\\MinecraftPingException' => $baseDir . '/app/libraries/MinecraftPingException.php',
+    'xPaw\\MinecraftQuery' => $baseDir . '/app/libraries/MinecraftQuery.php',
+    'xPaw\\MinecraftQueryException' => $baseDir . '/app/libraries/MinecraftQueryException.php',
 );
