@@ -22,7 +22,6 @@ $normalServers = DB::table('mcservers')->where('mcs_premium', '=', '0')->skip($s
 $premiumServers = DB::table('mcservers')->where('mcs_premium', '=', '1')->get();
 
 $i = $skip + 1;
-echo str_random(60);
 ?>
 <span class="badge" style="background-color: #388e3c;">90%</span><br><span class="badge" style="background-color: #fbc02d;">60%</span><br><span class="badge" style="background-color: #c62828;">20%</span>
 		<div class="row">

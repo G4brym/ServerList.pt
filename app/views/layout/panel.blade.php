@@ -1,3 +1,11 @@
+<?php
+$mcserver = DB::table('mcservers')->where('mcs_uid', '=', Auth::User()->id)->first();
+if($mcserver->mcs_maxplayers == 0){
+	$percent = 100;
+} else {
+	$percent = $mcserver->mcs_players * 100 / $mcserver->mcs_maxplayers;	
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,67 +70,41 @@
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
+						@if(!count($mcserver))
+                        <li>
+                            <a class="text-center" href="{{ URL::to('/panel/servers') }}">
+                                <strong>Ainda Não Tens Nenhum Servidor</strong>
+                            </a>
+                        </li>
+						@else
                         <li>
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>CSGO - Top MiniGames 1</strong>
-                                        <span class="pull-right text-muted">25/32</span>
+                                        <strong>{{ $mcserver->mcs_name }}</strong>
+                                        <span class="pull-right text-muted">{{ $mcserver->mcs_players }}/{{ $mcserver->mcs_maxplayers }}</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Full</span>
-                                        </div>
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ $percent }}%"></div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>GTASA - Best Rollplay</strong>
-                                        <span class="pull-right text-muted">40/100</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Full</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Minecraft - Factions</strong>
-                                        <span class="pull-right text-muted">14/150</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-                                            <span class="sr-only">10% Full</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
+                            <a class="text-center" href="{{ URL::to('/panel/servers') }}">
                                 <strong>Ver Todos Os Servidores</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
+						@endif
                     </ul>
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user"></i> {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
@@ -153,13 +135,13 @@
                             <a href="{{ URL::to('/panel') }}"><i class="fa fa-dashboard fa-fw"></i> Início</a>
                         </li>
                         <li>
-                            <a href="{{ URL::to('/panel/servers') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Servidores<span class="fa arrow"></span></a>
+                            <a href="{{ URL::to('/panel/servers') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Gerir Servidores</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-plus fa-fw"></i> Adicionar Servidor<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ URL::to('/panel/servers/new') }}">Adicionar Servidor</a>
-                                </li>
-                                <li>
-                                    <a href="{{ URL::to('/panel/servers') }}">Gerir Servidores</a>
+                                    <a href="{{ URL::to('/panel/minecraft/new') }}">Minecraft</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
