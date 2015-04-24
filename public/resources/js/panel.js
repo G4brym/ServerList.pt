@@ -34,3 +34,13 @@ $(function() {
         element.addClass('active');
     }
 });
+
+function Votifier(){
+
+	if ($('#votifier_field').is(':checked')){
+		document.getElementById("votifier_divfield").style.display = "block";
+	}else{
+		document.getElementById("votifier_divfield").style.display = "none";
+	}
+
+}

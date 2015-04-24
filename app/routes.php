@@ -29,7 +29,8 @@ Route::get('/minecraft', 'BaseController@showMinecraftList');
 Route::get('/csgo', 'BaseController@showCSGOList');
 Route::get('/cron', 'BaseController@cron');
 
-Route::get('user/{id}', 'IndexController@showUser');
+Route::get('/user/{id}', 'IndexController@showUser');
+Route::get('/minecraft/{id}', 'IndexController@showMCServer');
 
 //não se pode estar logado para poder ver 
 Route::group(array('before' => 'guest'), function()
@@ -57,14 +58,15 @@ Route::group(array('before' => 'auth'), function()
     //Paginas
 	
 	//panel
-    Route::get('panel', 'PanelController@showIndex');
-    Route::get('panel/servers', 'PanelController@showServers');
-    Route::get('panel/minecraft/new', 'PanelController@showNewMCServer');
+    Route::get('/panel', 'PanelController@showIndex');
+    Route::get('/panel/servers', 'PanelController@showServers');
+    Route::get('/panel/minecraft/new', 'PanelController@showNewMCServer');
+    Route::get('/panel/minecraft/{id}', 'PanelController@showMCServer');
 
 
     //Utilizador
-    Route::get('user', 'IndexController@showOwnUser');
-    Route::get('logout', 'LoginController@logout');
+    Route::get('/user', 'IndexController@showOwnUser');
+    Route::get('/logout', 'LoginController@logout');
 
     //Metodos Post
 	Route::post('newmcserver', array('before'=>'csrf', 'as' => 'newmcserver', 'uses'=>'PanelController@postNewMCServer'));

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 
 <head>
 
+	<link rel="shortcut icon" type="image/png" href="{{ URL::to('/resources/images/website/favicon.png') }}"/>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
+	<meta name="description" content="Os Melhores Servidores Tugas Num Unico Sitio">
 	<meta name="author" content="G4brym">
 
 	<title>{{$title}}</title>
@@ -20,6 +21,7 @@
 
 	<!-- Custom CSS -->
 	{{ HTML::style(URL::to('/resources/css/custom.css')) }}
+	{{ HTML::script(URL::to('/resources/js/custom.js')) }}
 
 	<!-- Custom Fonts -->
 	{{ HTML::style(URL::to('/resources/font-awesome/css/font-awesome.min.css')) }}
@@ -48,7 +50,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ URL::to('/') }}">{{ settings::get("siteName") }}</a>
+				<a class="navbar-brand" href="{{ URL::to('/') }}">
+					<img src="{{ URL::to('/resources/images/website/logo.png') }}" alt="Logo">
+				</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

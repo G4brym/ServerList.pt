@@ -18,5 +18,16 @@ class IndexController extends BaseController {
 		$title=settings::get("siteName") . " - " . Auth::user()->firstName . " " . Auth::user()->lastName;
 		return View::make('index.userProfile')->with('title', $title)->with('id', Auth::user()->id);
 	}
+	
+	public function showMCServer($id)
+	{
+		if(count(DB::table('mcservers')->where('mcs_id', '=', $id)->first())){
+			$title=settings::get("siteName") . " - Servidor De Minecraft";
+			return View::make('index.MCServer')->with('title', $title)->with('id', $id);
+		} else {
+			return Redirect::to(URL::to('/minecraft'));
+		}
+
+	}
 
 }

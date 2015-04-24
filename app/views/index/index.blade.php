@@ -89,7 +89,7 @@
 					<li>Suporte para as versões mais populares do Minecraft</li>
 					<li>Entre Outras...</li>
 				</ul>
-				<a href="#" class="btn btn-info"><i class="fa fa-windows"></i> Download Windows</a> <a href="#" class="btn btn-info"><i class="fa fa-linux"></i> Download Linux/MAC</a>
+				<a href="https://mega.co.nz/#!b9wXgQyQ!4BqnCsFLOVf2sHKU3XTQhXQmOJPwNn3scngvERA9tmM" target="_blank" class="btn btn-info"><i class="fa fa-windows"></i> Download Windows</a> <a href="https://mega.co.nz/#!uohGAaKJ!RMp9PB6heXLqiVKb_t51X_rnNsQWvC1motN8bE1r8zk" target="_blank" class="btn btn-info"><i class="fa fa-linux"></i> Download Linux/MAC</a>
 			</div><br>
 			<div class="col-md-6">
 				<img class="img-responsive" src="{{ URL::to('/resources/images/website/launcher.jpg') }}" alt="">

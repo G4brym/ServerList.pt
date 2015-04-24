@@ -5,19 +5,29 @@ class PanelController extends BaseController {
 	public function showIndex()
 	{
 		$title=settings::get("siteName") . " - Painel";
-		return View::make('panel.index')-> with('title', $title);
+		return View::make('panel.index')->with('title', $title);
 	}
 	
 	public function showServers()
 	{
 		$title=settings::get("siteName") . " - Servidores";
-		return View::make('panel.servers')-> with('title', $title);
+		return View::make('panel.servers')->with('title', $title);
 	}
 	
 	public function showNewMCServer()
 	{
 		$title=settings::get("siteName") . " - Adicionar Servidor";
-		return View::make('panel.newMCServer')-> with('title', $title);
+		return View::make('panel.newMCServer')->with('title', $title);
+	}
+	
+	public function showMCServer($id)
+	{
+		if(count(DB::table('mcservers')->where('mcs_id', '=', $id)->where('mcs_uid', '=', Auth::User()->id)->first())){
+			$title=settings::get("siteName") . " - Servidor De Minecraft";
+			return View::make('panel.MCServer')->with('title', $title)->with('id', $id);
+		} else {
+			return Redirect::to(URL::to('/panel/servers'));
+		}
 	}
 	
 	public function postNewMCServer()

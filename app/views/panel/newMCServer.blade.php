@@ -74,12 +74,12 @@
 							  <div class="col-lg-10">
 								<div class="checkbox">
 								  <label>
-									{{ Form::checkbox('serverV', 1, false) }}
+									{{ Form::checkbox('serverV', 1, false, ['id' => 'votifier_field', 'onclick' => 'Votifier();']) }}
 								  </label>
 								</div>
 							  </div>
 							</div>
-							<div style="display:none;">
+							<div id="votifier_divfield" style="display:none;">
 								<div class="form-group">
 								  <label for="serverVPort" class="col-lg-2 control-label">Porta do Votifier</label>
 								  <div class="col-lg-2">
