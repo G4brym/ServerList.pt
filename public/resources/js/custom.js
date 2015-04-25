@@ -1,10 +1,10 @@
 function uptime(uptime){
 	if (uptime >= 80){
-		return '<span class="badge" style="background-color: #388e3c;">90%</span>';
+		return '<span class="badge" style="background-color: #388e3c;">'+ uptime + '%</span>';
 	} else if(uptime > 20) {
-		return '<span class="badge" style="background-color: #fbc02d;">60%</span>';
+		return '<span class="badge" style="background-color: #fbc02d;">'+ uptime + '%</span>';
 	} else{
-		return '<span class="badge" style="background-color: #c62828;">20%</span>';
+		return '<span class="badge" style="background-color: #c62828;">'+ uptime + '%</span>';
 	}
 }
 

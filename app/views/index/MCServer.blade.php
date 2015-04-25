@@ -96,6 +96,9 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 					<th scope="row">Votos Este Mês</th>
 					<td>5</td>
 				  </tr>
+				  <tr>
+					<th scope="row" class="col-md-12"><script src="https://www.serverlist.pt/resources/js/embed.js?gm=mc&sid={{ $server->mcs_id }}"></script></th>
+				  </tr>
 				</tbody>
 			  </table>
 			</div>
