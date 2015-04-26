@@ -79,6 +79,19 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				</tbody>
 			  </table>
 			</div>
+		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES * * */
+			var disqus_shortname = 'serverllist';
+
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 	</div>
 	<div class="col-md-4">
 		<div class="panel panel-info">
@@ -90,14 +103,14 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				<tbody>
 				  <tr>
 					<th scope="row" class="col-md-4">Votos Hoje</th>
-					<td class="col-md-8">2</td>
+					<td class="col-md-8">{{ $server->mcs_dvotes }}</td>
 				  </tr>
 				  <tr>
 					<th scope="row">Votos Este Mês</th>
-					<td>5</td>
+					<td>{{ $server->mcs_mvotes }}</td>
 				  </tr>
 				  <tr>
-					<th scope="row" class="col-md-12"><script src="https://www.serverlist.pt/resources/js/embed.js?gm=mc&sid={{ $server->mcs_id }}"></script></th>
+					<th scope="row" class="col-md-12"><iframe src="https://www.serverlist.pt/serverlist.pt/public/embed/vote?gm=mc&sid={{ $server->mcs_id }}" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" frameborder="0" height="30" width="185"></iframe></th>
 				  </tr>
 				</tbody>
 			  </table>
@@ -109,4 +122,5 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 @endif
 	</div>
 </div>
+<?php var_dump(mcservers::isOnline('play.divinitycraft.net', 25565)) ?>
 @stop
