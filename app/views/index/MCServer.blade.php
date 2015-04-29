@@ -110,7 +110,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 					<td>{{ $server->mcs_mvotes }}</td>
 				  </tr>
 				  <tr>
-					<th scope="row" class="col-md-12"><iframe src="https://www.serverlist.pt/serverlist.pt/public/embed/vote?gm=mc&sid={{ $server->mcs_id }}" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" frameborder="0" height="30" width="185"></iframe></th>
+					<th scope="row" class="col-md-12"><iframe src="https://www.serverlist.pt/embed/vote?gm=mc&sid={{ $server->mcs_id }}" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" frameborder="0" height="30" width="185"></iframe></th>
 				  </tr>
 				</tbody>
 			  </table>
@@ -122,5 +122,4 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 @endif
 	</div>
 </div>
-<?php var_dump(mcservers::isOnline('play.divinitycraft.net', 25565)) ?>
 @stop
