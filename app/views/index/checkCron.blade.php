@@ -16,9 +16,9 @@ $servers = DB::table('mcservers')->get();
 foreach($servers as $server){
 
 	if($server->mcs_qport == null){
-		mcservers::checkQuery($server->mcs_id, $server->mcs_ip, $server->mcs_port, $day, $month, $year);
+		mcservers::checkNoQuery($server->mcs_id, $server->mcs_ip, $server->mcs_port, $day, $month, $year);
 	} else {
-		mcservers::checkNoQuery($server->mcs_id, $server->mcs_ip, $server->mcs_qport, $day, $month, $year);
+		mcservers::checkQuery($server->mcs_id, $server->mcs_ip, $server->mcs_qport, $day, $month, $year);
 	}
 
 }

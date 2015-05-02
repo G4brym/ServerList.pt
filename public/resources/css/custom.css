@@ -63,11 +63,11 @@ header.carousel .fill {
 }
 
 .intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
+    padding-top: 25px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 25px;
     text-align: center;
     color: #f8f8f8;
-    background: url(https://g4brym.github.io/resources/images/background.jpg) no-repeat center center;
+    background: url(../images/website/background.jpg) no-repeat center center;
 	background-attachment: fixed;
 }
 

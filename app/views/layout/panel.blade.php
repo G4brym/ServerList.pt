@@ -62,7 +62,7 @@ if($mcserver->mcs_maxplayers == 0){
                     <span class="icon-bar"></span>
                 </button>
 				<a class="navbar-brand" href="{{ URL::to('/') }}">
-					<img src="{{ URL::to('/resources/images/website/logo.png') }}" alt="Logo">
+					<img src="{{ URL::to('/resources/images/website/logo-small.png') }}" alt="Logo">
 				</a>
             </div>
             <!-- /.navbar-header -->

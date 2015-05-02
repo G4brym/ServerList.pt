@@ -28,6 +28,7 @@ Route::get('/', 'BaseController@showIndex');
 Route::get('/minecraft', 'BaseController@showMinecraftList');
 Route::get('/csgo', 'BaseController@showCSGOList');
 Route::get('/cron', 'BaseController@cron');
+Route::get('/dcron', 'BaseController@dcron');
 Route::get('/embed/vote', 'EmbedController@showVote');
 
 Route::get('/user/{id}', 'IndexController@showUser');

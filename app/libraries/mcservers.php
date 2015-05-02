@@ -45,6 +45,22 @@ Class mcservers {
 		return $Info;
 	}
 	
+    public static function motd($motd){
+
+		$colors = array("§1", "§2", "§3", "§4", "§5", "§6", "§7", "§8", "§9", "§a", "§b", "§c", "§d", "§e", "§f", "§A", "§B", "§C", "§D", "§E", "§F", "§k", "§l", "§m", "§n", "§o", "§r", "§K", "§L", "§M", "§N", "§O", "§R");
+		$motd = str_replace($colors, "", $motd);
+		
+		return $motd;
+
+	}
+	
+    public static function getAVGPlayersMC($sid, $day, $month, $year){
+
+		$avg = DB::table('mcserverschecks')->where('mcsc_sid', '=', $sid)->where('mcsc_day', '=', $day)->where('mcsc_month', '=', $month)->where('mcsc_year', '=', $year)->avg('mcsc_players');
+		return round($avg, 1);
+
+	}
+	
     public static function isOnline($ip, $port, $timeout = 1){
 
 		$Info = false;
@@ -144,7 +160,7 @@ Class mcservers {
 				array('mcs_maxplayers' => $info["players"]["max"],
 					  'mcs_players' => $info["players"]["online"],
 					  'mcs_status' => 1,
-					  'mcs_motd' => substr($info["description"], 0, 255)
+					  'mcs_motd' => mcservers::motd(substr($info["description"], 0, 255))
 			));
 		}
 	}
@@ -165,6 +181,8 @@ Class mcservers {
 		}
 
 		$timer = Number_Format( MicroTime( true ) - $timer, 2, '.', '' );
+		
+		return $query;
 		
 		$info = $query->GetInfo();
 		
@@ -198,7 +216,7 @@ Class mcservers {
 					  'mcs_status' => 1,
 					  'mcs_map' => substr($info["Map"], 0, 50),
 					  'mcs_plugins' => substr($info["Plugins"], 0, 255),
-					  'mcs_motd' => substr($info["HostName"], 0, 255)
+					  'mcs_motd' => mcservers::motd(substr($info["HostName"], 0, 255))
 			));
 		}
 	}

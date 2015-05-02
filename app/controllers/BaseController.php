@@ -29,7 +29,12 @@ class BaseController extends Controller {
 	
 	public function cron()
 	{
-		return View::make('index.cron');
+		return View::make('index.checkCron');
+	}
+	
+	public function dcron()
+	{
+		return View::make('index.dailyCron');
 	}
 
 }
