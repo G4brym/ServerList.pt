@@ -34,6 +34,9 @@ Route::get('/embed/vote', 'EmbedController@showVote');
 Route::get('/user/{id}', 'IndexController@showUser');
 Route::get('/minecraft/{id}', 'IndexController@showMCServer');
 
+//posts publicos
+Route::post('vote', array('before'=>'csrf', 'as' => 'vote', 'uses'=>'BaseController@postVote'));
+
 //não se pode estar logado para poder ver 
 Route::group(array('before' => 'guest'), function()
 {

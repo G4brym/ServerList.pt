@@ -13,8 +13,8 @@ return array(
 	| and private_key is the Secret key.
 	|
 	*/
-	'public_key'	=> '',
-	'private_key'	=> '',
+	'public_key'	=> '6Ldcz_8SAAAAAAJg3g-bCZQClMmECy3TmLWByoAk',
+	'private_key'	=> '6Ldcz_8SAAAAABdm4cnrIrcIQ-pjoL0hbHRd1gzb',
 	
 	/*
 	|--------------------------------------------------------------------------

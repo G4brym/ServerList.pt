@@ -5,11 +5,11 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 @section('head')
 <style>
 .top-img {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    background: url(<?php if(!utilities::MCSVhasbackground($server->mcs_id)){ echo URL::to('/resources/images/minecraft/backgrounds/default-background.jpg'); } else { echo URL::to('/resources/images/minecraft/backgrounds/'.$server->mcs_id.'.jpg'); } ?>) no-repeat center center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+	color: #f8f8f8;
+	background: url(<?php if(!utilities::MCSVhasbackground($server->mcs_id)){ echo URL::to('/resources/images/minecraft/backgrounds/default-background.jpg'); } else { echo URL::to('/resources/images/minecraft/backgrounds/'.$server->mcs_id.'.jpg'); } ?>) no-repeat center center;
 	background-attachment: fixed;
 }
 </style>
@@ -39,12 +39,15 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 @section('body')
 <div class="row">
 	<div class="col-md-8">
-		<div class="panel panel-primary">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading"><i class="fa fa-info-circle"></i> Informações</div>
-
+		<ul class="nav nav-tabs">
+			<li class="active"><a aria-expanded="false" href="#info" data-toggle="tab" style="background: #5c6bc0; color: #FFFFFF;"><i class="fa fa-info-circle"></i> Informações</a></li>
+			<li><a aria-expanded="true" href="#vote" data-toggle="tab" style="background: #5c6bc0; color: #FFFFFF;"><i class="fa fa-thumbs-o-up"></i> Votar</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade active in" id="info">
+			  <br>
 			  <!-- Table -->
-			  <table class="table">
+			  <table class="table table-striped table-hover">
 				<tbody>
 				  <tr>
 					<th scope="row" class="col-md-3">MOTD</th>
@@ -79,6 +82,40 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				</tbody>
 			  </table>
 			</div>
+			<div class="tab-pane fade" id="vote">
+				<br>
+				{{ Form::open(array('url' => 'vote', 'class'=>'form-horizontal')) }}
+									
+						<div class="form-group">
+						  <label for="shortSiteName" class="col-lg-3 control-label">Nome No Minecraft</label>
+						  <div class="col-lg-5">
+							{{ Form::text('shortSiteName', '', array('class' => 'form-control', 'autofocus' => 'autofocus', 'required' => 'required')) }}
+						  </div>
+						</div>
+						
+						<div class="form-group">
+						  <label for="shortSiteName" class="col-lg-3 control-label">Captcha</label>
+						  <div class="col-lg-5">
+							{{Form::captcha()}}
+						  </div>
+						</div>
+				
+					{{ Form::hidden('sid', $id) }}
+				
+					<div style="margin-top:10px" class="form-group">
+						<!-- Button -->
+
+						<div class="col-lg-10 col-lg-offset-3">
+							{{ Form::submit('Votar', array('class'=>'btn btn-success btn-sm')) }}
+
+						</div>
+					</div>   
+				{{ Form::close() }}   
+			</div>
+		</div>
+
+		<hr>
+		
 		<div id="disqus_thread"></div>
 		<script type="text/javascript">
 			/* * * CONFIGURATION VARIABLES * * */
@@ -115,6 +152,16 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				</tbody>
 			  </table>
 			</div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- SVL MCServer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3899991868406055"
+     data-ad-slot="5240810521"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 @if($server->mcs_desc != null)
 		<div class="well">
 			{{ $server->mcs_desc }}
