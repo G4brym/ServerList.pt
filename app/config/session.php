@@ -31,7 +31,7 @@ return array(
 
 	'lifetime' => 120,
 
-	'expire_on_close' => false,
+	'expire_on_close' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return array(
 	|
 	*/
 
-	'cookie' => settings::get('siteName') . '_session',
+	'cookie' => 'serverlist_pt_session',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -54,6 +54,38 @@ Class mcservers {
 
 	}
 	
+    public static function playerHasVoted($player){
+
+		$day = date("j");
+		$month = date("n");
+		$year = date("Y");
+		
+		$vote = DB::table('mcserversvotes')->where('mcsv_player', '=', $player)->where('mcsv_day', '=', $day)->where('mcsv_month', '=', $month)->where('mcsv_year', '=', $year)->first();
+		
+		if(count($vote)){
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
+    public static function ipHasVoted($ip){
+
+		$day = date("j");
+		$month = date("n");
+		$year = date("Y");
+		
+		$vote = DB::table('mcserversvotes')->where('mcsv_ip', '=', $ip)->where('mcsv_day', '=', $day)->where('mcsv_month', '=', $month)->where('mcsv_year', '=', $year)->first();
+		
+		if(count($vote)){
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
     public static function getAVGPlayersMC($sid, $day, $month, $year){
 
 		$avg = DB::table('mcserverschecks')->where('mcsc_sid', '=', $sid)->where('mcsc_day', '=', $day)->where('mcsc_month', '=', $month)->where('mcsc_year', '=', $year)->avg('mcsc_players');

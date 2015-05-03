@@ -42,6 +42,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 		<ul class="nav nav-tabs">
 			<li class="active"><a aria-expanded="false" href="#info" data-toggle="tab" style="background: #5c6bc0; color: #FFFFFF;"><i class="fa fa-info-circle"></i> Informações</a></li>
 			<li><a aria-expanded="true" href="#vote" data-toggle="tab" style="background: #5c6bc0; color: #FFFFFF;"><i class="fa fa-thumbs-o-up"></i> Votar</a></li>
+			<li><a aria-expanded="true" href="#banners" data-toggle="tab" style="background: #5c6bc0; color: #FFFFFF;"><i class="fa fa-picture-o"></i> Banners</a></li>
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade active in" id="info">
@@ -87,9 +88,9 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				{{ Form::open(array('url' => 'vote', 'class'=>'form-horizontal')) }}
 									
 						<div class="form-group">
-						  <label for="shortSiteName" class="col-lg-3 control-label">Nome No Minecraft</label>
+						  <label for="username" class="col-lg-3 control-label">Nome No Minecraft</label>
 						  <div class="col-lg-5">
-							{{ Form::text('shortSiteName', '', array('class' => 'form-control', 'autofocus' => 'autofocus', 'required' => 'required')) }}
+							{{ Form::text('MCUsername', '', array('class' => 'form-control', 'autofocus' => 'autofocus', 'maxlength' => 40, 'required' => 'required')) }}
 						  </div>
 						</div>
 						
@@ -111,6 +112,9 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 						</div>
 					</div>   
 				{{ Form::close() }}   
+			</div>
+			<div class="tab-pane fade" id="banners">
+  
 			</div>
 		</div>
 
@@ -140,7 +144,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				<tbody>
 				  <tr>
 					<th scope="row" class="col-md-4">Votos Hoje</th>
-					<td class="col-md-8">{{ $server->mcs_dvotes }}</td>
+					<td class="col-md-8">{{ $server->mcs_tvotes }}</td>
 				  </tr>
 				  <tr>
 					<th scope="row">Votos Este Mês</th>

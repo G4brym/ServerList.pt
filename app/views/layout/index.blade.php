@@ -63,9 +63,6 @@
 							<li>
 								<a href="{{ URL::to('/minecraft') }}">Minecraft</a>
 							</li>
-							<li>
-								<a href="{{ URL::to('/csgo') }}">CSGO</a>
-							</li>
 						</ul>
 					</li>
 					@if(Auth::guest())
