@@ -92,7 +92,7 @@
 			 						   {{ Form::submit('Registar', array('class'=>'btn btn-warning')) }}
                                     </div>
                                 </div>
-                                
+                            
                             {{ Form::close() }}
                          </div>
                     </div>

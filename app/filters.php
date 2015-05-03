@@ -82,8 +82,8 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-    if (Request::getMethod() !== 'GET' && Session::token() != Input::get('_token'))
+    if (Session::token() != Input::get('_token'))
     {
-        throw new Illuminate\Session\TokenMismatchException;
+        return Redirect::to('/login')->withErrors("A tua sessão expirou");
     }
 });

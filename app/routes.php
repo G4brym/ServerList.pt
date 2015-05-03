@@ -22,6 +22,10 @@ App::missing(function($exception)
 	$title=settings::get("siteName") . " - 404";
 	return View::make('login.404')->with('title', $title);
 });
+App::error(function(\Illuminate\Session\TokenMismatchException $exception)
+{
+    return Redirect::route('login')->withErrors('Your session has expired. Please try logging in again.');
+});
 
 //Paginas Publicas
 Route::get('/', 'BaseController@showIndex');

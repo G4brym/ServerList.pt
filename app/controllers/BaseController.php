@@ -41,30 +41,12 @@ class BaseController extends Controller {
 		if($v->fails())
 		{
 			
-			return Redirect::to('/login')->withErrors($v);
+			return Redirect::to('/minecraft')->withErrors($v);
 			
 		} else {
 
-			if(filter_var($input['user'], FILTER_VALIDATE_EMAIL)) {
-				$credentials = array('email' => $input['user'], 'password' => $input['password']);
-			}
-			else {
-				$credentials = array('id' => $input['user'], 'password' => $input['password']);
-			}
+			return Redirect::to('/minecraft')->withErrors($v);
 
-			if(Auth::attempt($credentials))
-			{
-
-				$user = Auth::user();
-				$user->lastlogin = time();
-				$user->save();
-				return Redirect::to('/');
-
-			} else {
-
-				return Redirect::to('/login')->withErrors('Login invalido');
-
-			}
 		}
 	}
 }
