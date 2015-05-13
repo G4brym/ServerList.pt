@@ -49,7 +49,7 @@ class BaseController extends Controller {
 		if($v->passes())
 		{
 			
-			if(mcservers::playerHasVoted($input['MCUsername']) || mcservers::ipHasVoted($_SERVER["HTTP_CF_CONNECTING_IP"])){
+			if(mcservers::playerHasVoted($sid, $input['MCUsername']) || mcservers::ipHasVoted($sid, $_SERVER["HTTP_CF_CONNECTING_IP"])){
 				return Redirect::to('/minecraft/'.$sid)->withErrors("Já votaste hoje");
 			}
 			
@@ -62,17 +62,17 @@ class BaseController extends Controller {
 			}
 			
 			DB::table('mcservers')->where('mcs_id', $sid)->update(
-				array('mcs_tvotes' => $server->tvotes + 1,
-					  'mcs_mvotes' => $server->mvotes + 1
+				array('mcs_tvotes' => $server->mcs_tvotes + 1,
+					  'mcs_mvotes' => $server->mcs_mvotes + 1
 			));
 			
 			DB::table('mcserversvotes')->insert(
-				array('mcsc_sid' => $sid,
-					  'mcsc_username' => $input['MCUsername'],
-					  'mcsc_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"],
-					  'mcsc_day' => date("j"),
-					  'mcsc_month' => date("n"),
-					  'mcsc_year' => date("Y"),
+				array('mcsv_sid' => $sid,
+					  'mcsv_player' => $input['MCUsername'],
+					  'mcsv_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"],
+					  'mcsv_day' => date("j"),
+					  'mcsv_month' => date("n"),
+					  'mcsv_year' => date("Y"),
 			));
 			
 			

@@ -54,13 +54,13 @@ Class mcservers {
 
 	}
 	
-    public static function playerHasVoted($player){
+    public static function playerHasVoted($sid, $player){
 
 		$day = date("j");
 		$month = date("n");
 		$year = date("Y");
 		
-		$vote = DB::table('mcserversvotes')->where('mcsv_player', '=', $player)->where('mcsv_day', '=', $day)->where('mcsv_month', '=', $month)->where('mcsv_year', '=', $year)->first();
+		$vote = DB::table('mcserversvotes')->where('mcsv_sid', '=', $sid)->where('mcsv_player', '=', $player)->where('mcsv_day', '=', $day)->where('mcsv_month', '=', $month)->where('mcsv_year', '=', $year)->first();
 		
 		if(count($vote)){
 			return true;
@@ -70,13 +70,13 @@ Class mcservers {
 
 	}
 	
-    public static function ipHasVoted($ip){
+    public static function ipHasVoted($sid, $ip){
 
 		$day = date("j");
 		$month = date("n");
 		$year = date("Y");
 		
-		$vote = DB::table('mcserversvotes')->where('mcsv_ip', '=', $ip)->where('mcsv_day', '=', $day)->where('mcsv_month', '=', $month)->where('mcsv_year', '=', $year)->first();
+		$vote = DB::table('mcserversvotes')->where('mcsv_sid', '=', $sid)->where('mcsv_ip', '=', $ip)->where('mcsv_day', '=', $day)->where('mcsv_month', '=', $month)->where('mcsv_year', '=', $year)->first();
 		
 		if(count($vote)){
 			return true;
@@ -164,7 +164,7 @@ Class mcservers {
 
 		$timer = Number_Format( MicroTime( true ) - $timer, 2, '.', '' );
 		
-		if($info === false){
+		if($info == false){
 			DB::table('mcserverschecks')->insert(
 				array('mcsc_sid' => $sid,
 					  'mcsc_online' => 0,
