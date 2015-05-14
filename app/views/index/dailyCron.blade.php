@@ -30,7 +30,7 @@ foreach($servers as $server){
 	));
 }
 
-
+banners::generateMC();
 
 
 

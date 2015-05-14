@@ -68,16 +68,6 @@ header.carousel .fill {
     text-align: center;
     color: #f8f8f8;
     background: url(../images/website/background.jpg) no-repeat center center;
-	background-attachment: fixed;
-}
-
-.intro-minecraft {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    background: url(http://cdn01.wallconvert.com/_media/wallpapers_1920x1080/1/2/minecraft-15506.jpg) no-repeat center center;	
-	background-attachment: fixed;
 }
 
 .intro-message {

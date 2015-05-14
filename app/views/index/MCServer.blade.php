@@ -10,7 +10,6 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 	text-align: center;
 	color: #f8f8f8;
 	background: url(<?php if(!utilities::MCSVhasbackground($server->mcs_id)){ echo URL::to('/resources/images/minecraft/backgrounds/default-background.jpg'); } else { echo URL::to('/resources/images/minecraft/backgrounds/'.$server->mcs_id.'.jpg'); } ?>) no-repeat center center;
-	background-attachment: fixed;
 }
 </style>
 @stop
@@ -114,7 +113,10 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				{{ Form::close() }}   
 			</div>
 			<div class="tab-pane fade" id="banners">
-  
+				<br>
+				<a href="https://www.serverlist.pt/minecraft/{{ $server->mcs_id }}" target="_blank"><img src="https://www.serverlist.pt/resources/images/minecraft/generatedBanners/{{ $server->mcs_id }}.jpg" border="0"></a>
+				<br>
+				<textarea style="resize: none;" class="form-control" rows="2" readonly>&lt;a href="https://www.serverlist.pt/minecraft/{{ $server->mcs_id }}" target="_blank"&gt;&lt;img src="https://www.serverlist.pt/resources/images/minecraft/generatedBanners/{{ $server->mcs_id }}.jpg" border="0"&gt;&lt;/a&gt;</textarea>
 			</div>
 		</div>
 

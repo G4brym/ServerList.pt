@@ -20,6 +20,7 @@ return array(
     'Whoops\\Module' => $vendorDir . '/filp/whoops/src/deprecated/Zend/Module.php',
     'Whoops\\Provider\\Zend\\ExceptionStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/ExceptionStrategy.php',
     'Whoops\\Provider\\Zend\\RouteNotFoundStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/RouteNotFoundStrategy.php',
+    'banners' => $baseDir . '/app/libraries/banners.php',
     'mcservers' => $baseDir . '/app/libraries/mcservers.php',
     'settings' => $baseDir . '/app/libraries/settings.php',
     'time' => $baseDir . '/app/libraries/time.php',
