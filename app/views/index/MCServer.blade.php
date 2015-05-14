@@ -116,7 +116,10 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				<br>
 				<a href="https://www.serverlist.pt/minecraft/{{ $server->mcs_id }}" target="_blank"><img src="https://www.serverlist.pt/resources/images/minecraft/generatedBanners/{{ $server->mcs_id }}.jpg" border="0"></a>
 				<br>
-				<textarea style="resize: none;" class="form-control" rows="2" readonly>&lt;a href="https://www.serverlist.pt/minecraft/{{ $server->mcs_id }}" target="_blank"&gt;&lt;img src="https://www.serverlist.pt/resources/images/minecraft/generatedBanners/{{ $server->mcs_id }}.jpg" border="0"&gt;&lt;/a&gt;</textarea>
+				<textarea style="resize: none; width: 468px;" class="form-control" rows="3" readonly>&lt;a href="https://www.serverlist.pt/minecraft/{{ $server->mcs_id }}" target="_blank"&gt;&lt;img src="https://www.serverlist.pt/resources/images/minecraft/generatedBanners/{{ $server->mcs_id }}.jpg" border="0"&gt;&lt;/a&gt;</textarea>
+				<br><br>
+				<iframe src="https://www.serverlist.pt/embed/vote?gm=mc&sid={{ $server->mcs_id }}" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" frameborder="0" height="30" width="185"></iframe>
+				<textarea style="resize: none; width: 468px;" class="form-control" rows="4" readonly>&lt;iframe src="https://www.serverlist.pt/embed/vote?gm=mc&sid={{ $server->mcs_id }}" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" frameborder="0" height="30" width="185" &gt;&lt;/iframe&gt;</textarea>
 			</div>
 		</div>
 

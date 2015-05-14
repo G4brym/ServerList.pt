@@ -73,7 +73,7 @@ if($gm == "mc"){
 
 <body style="background-color:transparent">
 <div title="" data-original-title="" class="btn-group" id="popvotes" data-toggle="popover" data-trigger="manual" data-placement="right" data-content="0">
-<a href="<?php if($gm == "mc"){ echo URL::to('/minecraft/'.$server->mcs_id.'/vote'); } ?>" class="btn btn-inverse btn-small" style="background: #4caf50;">Vota Em <strong>ServerList.pt</strong></a>
+<a href="<?php if($gm == "mc"){ echo URL::to('/minecraft/'.$server->mcs_id.'/vote'); } ?>" class="btn btn-inverse btn-small" style="background: #4caf50;" target="_blank">Vota Em <strong>ServerList.pt</strong></a>
 </div><div style="top: 0.366669px; left: 143px; display: block;" class="popover fade right in"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content">{{ $server->mcs_mvotes }}</div></div>
 <script type="text/javascript">
 <!--
