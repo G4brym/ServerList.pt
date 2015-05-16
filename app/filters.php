@@ -37,7 +37,7 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		return Redirect::to(URL::to('/'))->withErrors('Tens De Fazer Login Para Poderes Entrar Aqui');
+		return Redirect::to(URL::to('/login'))->withErrors('Tens De Fazer Login Para Poderes Entrar Aqui');
 	}
 });
 
@@ -45,7 +45,7 @@ Route::filter('admin', function()
 {
 	if (Auth::guest())
 	{
-		return Redirect::to(URL::to('/'))->withErrors('Tens De Fazer Login Para Poderes Entrar Aqui');
+		return Redirect::to(URL::to('/login'))->withErrors('Tens De Fazer Login Para Poderes Entrar Aqui');
 	}
 	if (Auth::user()->admin!=1)
 	{

@@ -19,21 +19,19 @@ $mcservers = DB::table('mcservers')->where('mcs_uid', '=', Auth::User()->id)->ge
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th class="col-md-1"><i class="fa fa-picture-o"></i> Icon</th>
 								<th class="col-md-5"><i class="fa fa-server"></i> Servidor</th>
 								<th class="col-md-2"><i class="fa fa-users"></i> Jogadores</th>
 								<th class="col-md-2"><i class="fa fa-signal"></i> Uptime</th>
 								<th class="col-md-1"><i class="fa fa-thumbs-o-up"></i> Votos</th>
-								<th class="col-md-1"><i class="fa fa-pencil-square-o"></i> Opções</th>
+								<th class="col-md-2"><i class="fa fa-tag"></i> Etiquetas</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($mcservers as $server)
 								<tr>
-									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="<?php if($server->mcs_favicon == null){ echo URL::to('/resources/images/minecraft/banners/default-square.png'); } else { echo $server->mcs_favicon; } ?>" alt="Server Favicon" height="64" width="64"></a></center></td>
-									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="<?php if(!utilities::MCSVhasBanner($server->mcs_id)){ echo URL::to('/resources/images/minecraft/banners/default-banner.jpg'); } else { echo URL::to('/resources/images/minecraft/banners/'.$server->mcs_id); } ?>" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?></td>
+									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="<?php if(!utilities::MCSVhasBanner($server->mcs_id)){ echo URL::to('/resources/images/minecraft/banners/default-banner.jpg'); } else { echo URL::to('/resources/images/minecraft/banners/'.$server->mcs_id); } ?>" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script></td>
 									<td>{{ $server->mcs_players }}/{{ $server->mcs_maxplayers }}<br><br>Emanuel, Joaquim ...</td>
-									<td>{{ $server->mcs_uptime }}</td>
+									<td><script>document.write(uptime({{ $server->mcs_uptime }}));</script></td>
 									<td>{{ $server->mcs_mvotes }}</td>
 									<td><center><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar Servidor</a><br><br><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}" class="btn btn-danger"><i class="fa fa-pencil"></i> Apagar Servidor</a></center></td>
 								</tr>

@@ -27,10 +27,9 @@ foreach($servers as $server){
 	
 	DB::table('mcservers')->where('mcs_id', $server->mcs_id)->update(
 		array('mcs_uptime' => $uptime,
+		array('mcs_tvotes' => 0,
 	));
 }
-
-banners::generateMC();
 
 
 

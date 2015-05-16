@@ -28,7 +28,7 @@ $i = $skip + 1;
 <!-- Servidores Premium -->
 			<div class="col-md-10 col-md-offset-1">
 				<h2>
-					<i class="fa fa-trophy"></i> Servidores Premium <a href="{{ URL::to('/panel/minecraft') }}" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Adiciona O Teu Servidor</a>
+					<i class="fa fa-trophy"></i> Servidores Premium <a href="{{ URL::to('/panel/minecraft/new') }}" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Adiciona O Teu Servidor</a>
 				</h2>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover">
@@ -147,4 +147,15 @@ echo '
 </nav>
 </center>';
 ?>
+<center>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- SVL List -->
+	<ins class="adsbygoogle"
+		 style="display:inline-block;width:728px;height:90px"
+		 data-ad-client="ca-pub-3899991868406055"
+		 data-ad-slot="2531239328"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</center>
 @stop

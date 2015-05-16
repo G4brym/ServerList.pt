@@ -23,7 +23,7 @@ Class banners {
 			
 			$backgorund = imagecreatefromjpeg(app_path() . '/tools/banners/background.jpg');
 			$name = $server->mcs_name;
-			$players = $server->mcs_players . ' / ' . $server->mcs_maxplayers . ' Players';
+			$players = $server->mcs_players . '/' . $server->mcs_maxplayers . ' Players';
 			
 			if($server->mcs_status == 1){
 				$statusText = 'Online';

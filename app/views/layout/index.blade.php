@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Os Melhores Servidores Tugas Num Unico Sitio">
 	<meta name="author" content="G4brym">
-	<meta name="keywords" content="minecraft, minecraft server list, serverlist, minecraft servers, minecraft server info, minecraft serverlist, minecraft top list, minecraft toplist, best minecraft servers, serverlist.pt, serverlist pt, serverlist portugal, servidores em portugal, servidores de portugal, lista de servidores, lista de servidores de portugal, servidores de minecraft, servidores de csgo, servidores de cs, csgo server list, csgo serverlist">
+	<meta name="keywords" content="minecraft, minecraft server list, serverlist, minecraft servers, minecraft server info, minecraft serverlist, minecraft top list, minecraft toplist, best minecraft servers, serverlist.pt, serverlist pt, serverlist portugal, servidores em portugal, servidores de portugal, lista de servidores, lista de servidores de portugal, servidores de minecraft, servidores de csgo, servidores de cs, csgo server list, csgo serverlist, svl, svl pt, svlpt">
 	<meta name="language" content="pt-PT">
 
 	<title>{{$title}}</title>

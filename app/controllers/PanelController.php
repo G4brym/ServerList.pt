@@ -34,7 +34,7 @@ class PanelController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'serverType' => 'required');
+		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
@@ -58,12 +58,12 @@ class PanelController extends BaseController {
 					  'mcs_ip' => $input['serverIp'],
 					  'mcs_port' => $input['serverPort'],
 					  'mcs_aliase' => $input['serverAliase'],
-					  'mcs_type' => $input['serverType'])
+					  'mcs_msg' => $input['serverMsg'])
 			);
 
 			$id = DB::table('mcservers')->where('mcs_ip', '=', $input['serverIp'])->where('mcs_port', '=', $input['serverPort'])->first();
 			DB::table('logs')->insert(
-			    array('logs_action' => 'New Server', 'logs_userId' => $id->mcs_uid, 'logs_ip' => "inserir mais tarde ip da cloudflare")
+			    array('logs_action' => 'New Server', 'logs_userId' => $id->mcs_uid, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
 			return Redirect::to(URL::to("/panel/servers"))->With('success', 'Servidor Adicionado.');

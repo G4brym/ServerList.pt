@@ -25,7 +25,7 @@ foreach($servers as $server){
 
 settings::set('lastCheck', time());
 
-
+banners::generateMC();
 
 
 

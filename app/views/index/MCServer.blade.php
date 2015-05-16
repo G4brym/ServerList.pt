@@ -5,9 +5,9 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 @section('head')
 <style>
 .top-img {
-	padding-top: 50px;
-	padding-bottom: 50px;
-	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: left;
 	color: #f8f8f8;
 	background: url(<?php if(!utilities::MCSVhasbackground($server->mcs_id)){ echo URL::to('/resources/images/minecraft/backgrounds/default-background.jpg'); } else { echo URL::to('/resources/images/minecraft/backgrounds/'.$server->mcs_id.'.jpg'); } ?>) no-repeat center center;
 }
@@ -23,7 +23,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 					<div class="col-lg-12">
 						<div class="intro-message pull-left">
 							<h2 style="color: #3949ab;"><strong>{{ $server->mcs_name }}</strong></h1><br>
-							<h3 style="color: #4caf50;">{{ $server->mcs_msg }}</h3>
+							<h3 style="color: #4caf50;">{{ $server->mcs_msg }}<?php if(isset($server->mcs_website)){ echo '<small> - <a href ="' . $server->mcs_website . '" target="_blank">' . $server->mcs_website . '</a></small>'; } ?></h3>
 						</div>
 					</div>
 				</div>
@@ -55,7 +55,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				  </tr>
 				  <tr>
 					<th scope="row">Estado</th>
-					<td><script>document.write(status({{ $server->mcs_status }}));</script></td>
+					<td><script>document.write(status({{ $server->mcs_status }}));</script> <small class="pull-right">verificado pela última vez há {{ time::ago(settings::get('lastCheck')) }}</small></td>
 				  </tr>
 				  <tr>
 					<th scope="row">Endereço De IP</th>
@@ -64,7 +64,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 @if($server->mcs_website != null)
 					<tr>
 					<th scope="row">Website</th>
-					<td>{{ $server->mcs_website }}</td>
+						<td><a href="{{ $server->mcs_website }}" target="_blank">{{ $server->mcs_website }}</a></td>
 				  </tr>
 @endif
 				  <tr>
@@ -171,6 +171,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+<br>
 @if($server->mcs_desc != null)
 		<div class="well">
 			{{ $server->mcs_desc }}

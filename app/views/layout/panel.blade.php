@@ -35,6 +35,8 @@ if($mcserver->mcs_maxplayers == 0){
 	<!-- Custom Fonts -->
 	{{ HTML::style(URL::to('/resources/font-awesome/css/font-awesome.min.css')) }}
 	
+	{{ HTML::script(URL::to('/resources/js/custom.js')) }}
+	
 	@yield('css')
 	
 	@yield('head')

@@ -2,7 +2,7 @@
 @section('body')
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="page-header">Adicionar Um Novo Servidor</h1>
+						<h1 class="page-header">Adicionar Um Novo Servidor De Minecraft</h1>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<i class="fa fa-bar-chart-o fa-fw"></i> Detalhes Do Servidor
@@ -28,6 +28,13 @@
 							  <label for="serverSite" class="col-lg-2 control-label">Website</label>
 							  <div class="col-lg-4">
 								{{ Form::text('serverSite', '', array('class' => 'form-control', 'maxlength' => '100')) }}
+							  </div>
+							</div>
+							<div class="form-group">
+							  <label for="serverSite" class="col-lg-2 control-label">Lema</label>
+							  <div class="col-lg-4">
+								{{ Form::text('serverMsg', '', array('class' => 'form-control', 'maxlength' => '100')) }}
+								<span class="label label-warning">Ex: Onde Os Blocos Nascem</span>
 							  </div>
 							</div>
 							<div class="form-group">
@@ -58,13 +65,6 @@
 							  <div class="col-lg-4">
 								{{ Form::text('serverAliase', '', array('class' => 'form-control', 'maxlength' => '100')) }}
 								<span class="label label-warning">Ex: play.mydomain.com</span>
-							  </div>
-							</div>
-							<div class="form-group">
-							  <label for="serverType" class="col-lg-2 control-label">Tipo De Versão</label>
-							  <div class="col-lg-3">
-								  {{ Form::select('serverType', ['0' => 'Antiga', '1' => 'Recente'], 0, ['class' => 'form-control']) }}
-								  <span class="label label-warning">Antiga -> Versão 1.6.4 ou menor <strong>|</strong> Recente -> Versão 1.7.0 ou maior</span>
 							  </div>
 							</div>
 							<hr>
