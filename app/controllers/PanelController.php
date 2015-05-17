@@ -68,7 +68,7 @@ class PanelController extends BaseController {
 				array('mcs_uid' => Auth::user()->id,
 					  'mcs_name' => $input['serverName'],
 					  'mcs_desc' => $input['serverDesc'],
-					  'mcs_website' => $input['serverWebsite'],
+					  'mcs_website' => $input['serverSite'],
 					  'mcs_msg' => $input['serverMsg'],
 					  'mcs_ip' => $input['serverIp'],
 					  'mcs_port' => $input['serverPort'],
@@ -136,7 +136,7 @@ class PanelController extends BaseController {
 			DB::table('mcservers')->where('mcs_id', '=', $id->mcs_id)->update(
 				array('mcs_name' => $input['serverName'],
 					  'mcs_desc' => $input['serverDesc'],
-					  'mcs_website' => $input['serverWebsite'],
+					  'mcs_website' => $input['serverSite'],
 					  'mcs_msg' => $input['serverMsg'],
 					  'mcs_aliase' => $input['serverAliase'],
 					  'mcs_votifier' => $input['serverV'],
