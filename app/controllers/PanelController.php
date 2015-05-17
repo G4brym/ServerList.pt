@@ -150,7 +150,7 @@ class PanelController extends BaseController {
 
 			if(null !== Input::file('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
-				$publicpath = public_path('resources/images/minecraft/banners/' . $filename);
+				$publicpath = public_path() . '/resources/images/minecraft/banners/' . $filename;
 				Image::make($image->getRealPath())->save($publicpath);
 			}
 
