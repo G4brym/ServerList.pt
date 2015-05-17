@@ -23,13 +23,13 @@ $mcservers = DB::table('mcservers')->where('mcs_uid', '=', Auth::User()->id)->ge
 								<th class="col-md-2"><i class="fa fa-users"></i> Jogadores</th>
 								<th class="col-md-2"><i class="fa fa-signal"></i> Uptime</th>
 								<th class="col-md-1"><i class="fa fa-thumbs-o-up"></i> Votos</th>
-								<th class="col-md-2"><i class="fa fa-tag"></i> Etiquetas</th>
+								<th class="col-md-2"><i class="fa fa-wrench"></i> Gerir</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($mcservers as $server)
 								<tr>
-									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="<?php if(!utilities::MCSVhasBanner($server->mcs_id)){ echo URL::to('/resources/images/minecraft/banners/default-banner.jpg'); } else { echo URL::to('/resources/images/minecraft/banners/'.$server->mcs_id); } ?>" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script></td>
+									<td><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}"><img src="<?php if(!utilities::MCSVhasBanner($server->mcs_id)){ echo URL::to('/resources/images/minecraft/banners/default-banner.jpg'); } else { echo URL::to('/resources/images/minecraft/banners/'.$server->mcs_id); } ?>" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script></td>
 									<td>{{ $server->mcs_players }}/{{ $server->mcs_maxplayers }}<br><br>Emanuel, Joaquim ...</td>
 									<td><script>document.write(uptime({{ $server->mcs_uptime }}));</script></td>
 									<td>{{ $server->mcs_mvotes }}</td>

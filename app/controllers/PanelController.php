@@ -34,39 +34,127 @@ class PanelController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100');
+		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'banner' => 'image|image_size:=468,=60');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
 		{
 			
 			if(count(DB::table('mcservers')->where('mcs_ip', '=', $input['serverIp'])->where('mcs_port', '=', $input['serverPort'])->first())){
-				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("O IP deste servidor já está registado");
+				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("O IP deste servidor já está registado, entra em contacto com a staff se achas que isto é um erro");
 			}
 			
 			if(isset($input['serverV'])){
+				$input['serverV'] = 1;
 				if($input['serverVPort'] == null){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a porta");
 				}
 				if($input['serverVPKey'] == null){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a Public Key");
 				}
+			} else {
+				$input['serverV'] = 0;
 			}
 			
+			if(null !== Input::file('banner')){
+				$image = Input::file('banner');
+
+				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
+					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
+				}
+			}
+
 			DB::table('mcservers')->insert(
 				array('mcs_uid' => Auth::user()->id,
+					  'mcs_name' => $input['serverName'],
+					  'mcs_desc' => $input['serverDesc'],
+					  'mcs_website' => $input['serverWebsite'],
+					  'mcs_msg' => $input['serverMsg'],
 					  'mcs_ip' => $input['serverIp'],
 					  'mcs_port' => $input['serverPort'],
 					  'mcs_aliase' => $input['serverAliase'],
-					  'mcs_msg' => $input['serverMsg'])
+					  'mcs_votifier' => $input['serverV'],
+					  'mcs_vport' => $input['serverVPort'],
+					  'mcs_votifierkey' => $input['serverVPKey'])
 			);
 
 			$id = DB::table('mcservers')->where('mcs_ip', '=', $input['serverIp'])->where('mcs_port', '=', $input['serverPort'])->first();
 			DB::table('logs')->insert(
-			    array('logs_action' => 'New Server', 'logs_userId' => $id->mcs_uid, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
+				array('logs_action' => 'New Server ' . $id->mcs_sid, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
+			if(null !== Input::file('banner')){
+				$filename  = $id->mcs_sid . '.' . $image->getClientOriginalExtension();
+				$publicpath = public_path('resources/images/minecraft/banners/' . $filename);
+				Image::make($image->getRealPath())->save($publicpath);
+			}
+
 			return Redirect::to(URL::to("/panel/servers"))->With('success', 'Servidor Adicionado.');
+
+		} else {
+
+			return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors($v);
+
+		}
+	}
+	
+	public function postUpdateMCServer()
+	{
+		Input::merge(array_map('trim', Input::all()));
+		$input = Input::all();
+		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'banner' => 'image|image_size:=468,=60');
+		
+		$v = Validator::make($input, $rules);
+		if ($v->passes())
+		{
+			
+			$id = DB::table('mcservers')->where('mcs_sid', '=', $input['sid'])->where('mcs_uid', '=', Auth::user()->id)->first();
+			if(!count($id)){
+				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Ocorreu um erro com a validação do servidor");
+			}
+			
+			if(isset($input['serverV'])){
+				$input['serverV'] = 1;
+				if($input['serverVPort'] == null){
+					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a porta");
+				}
+				if($input['serverVPKey'] == null){
+					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a Public Key");
+				}
+			} else {
+				$input['serverV'] = 0;
+			}
+			
+			if(null !== Input::file('banner')){
+				$image = Input::file('banner');
+
+				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
+					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
+				}
+			}
+
+			DB::table('mcservers')->where('mcs_sid', '=', $id->mcs_sid)->update(
+				array('mcs_name' => $input['serverName'],
+					  'mcs_desc' => $input['serverDesc'],
+					  'mcs_website' => $input['serverWebsite'],
+					  'mcs_msg' => $input['serverMsg'],
+					  'mcs_aliase' => $input['serverAliase'],
+					  'mcs_votifier' => $input['serverV'],
+					  'mcs_vport' => $input['serverVPort'],
+					  'mcs_votifierkey' => $input['serverVPKey'])
+			);
+
+			DB::table('logs')->insert(
+				array('logs_action' => 'Updated Server ' . $id->mcs_sid, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
+			);
+
+			if(null !== Input::file('banner')){
+				$filename  = $id->mcs_sid . '.' . $image->getClientOriginalExtension();
+				$publicpath = public_path('resources/images/minecraft/banners/' . $filename);
+				Image::make($image->getRealPath())->save($publicpath);
+			}
+
+			return Redirect::to(URL::to("/panel/servers"))->With('success', 'Servidor Atualizado.');
 
 		} else {
 

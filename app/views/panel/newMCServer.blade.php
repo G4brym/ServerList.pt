@@ -41,7 +41,7 @@
 							  <label for="banner" class="col-lg-2 control-label">Banner</label>
 							  <div class="col-lg-4">
 								  {{ Form::file('banner') }}
-								  <span class="label label-warning">A resolução maxima é 468x60 pixels. O ficheiro pode ter no maximo 1MB. As extenções permitidas são: jpg, png, gif</span>
+								  <span class="label label-warning">A resolução têm de ser de 468x60 pixels. O ficheiro pode ter no maximo 1MB. As extenções permitidas para os banners são .jpg, .png e .gif</span>
 							  </div>
 							</div>
 							<hr>

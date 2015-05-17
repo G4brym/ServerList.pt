@@ -79,6 +79,7 @@ Route::group(array('before' => 'auth'), function()
 
     //Metodos Post
 	Route::post('newmcserver', array('before'=>'csrf', 'as' => 'newmcserver', 'uses'=>'PanelController@postNewMCServer'));
+	Route::post('updatemcserver', array('before'=>'csrf', 'as' => 'updatemcserver', 'uses'=>'PanelController@postUpdateMCServer'));
 });
 
 //Tem de ser admin para poder executar
