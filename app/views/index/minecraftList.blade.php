@@ -23,6 +23,7 @@ $premiumServers = DB::table('mcservers')->where('mcs_premium', '=', '1')->get();
 
 $i = $skip + 1;
 ?>
+<img src="http://cdn2.minecraft-mp.com/images/banners/banner-80683-1429877935.gif" alt="FluzzerNetwork (1.7-1.8)" title="FluzzerNetwork (1.7-1.8)" border="0">
 <div class="row">
 			
 <!-- Servidores Premium -->
