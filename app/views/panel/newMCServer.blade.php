@@ -10,7 +10,7 @@
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 
-						{{ Form::open(array('route' => 'newmcserver', 'class'=>'form-horizontal')) }}
+						{{ Form::open(array('route' => 'newmcserver', 'class'=>'form-horizontal', 'files' => true)) }}
 							<h3 class="col-md-offset-2">Geral</h3>
 							<div class="form-group">
 							  <label for="serverName" class="col-lg-2 control-label">Nome Do Servidor<span style="color: #f44336; font-size: 120%;">*</span></label>

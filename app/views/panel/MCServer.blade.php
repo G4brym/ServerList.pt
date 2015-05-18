@@ -3,7 +3,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 ?>
 @extends('layout.panel')
 @section('body')
-						{{ Form::open(array('route' => 'updatemcserver', 'class'=>'form-horizontal')) }}
+						{{ Form::open(array('route' => 'updatemcserver', 'class'=>'form-horizontal', 'files' => true)) }}
 						{{ Form::hidden('sid', $id) }}
 							<h3 class="col-md-offset-2">Geral</h3>
 							<div class="form-group">

@@ -63,11 +63,7 @@ class PanelController extends BaseController {
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
 				
-				$hasbanner = true;
-			} else {
-				$hasbanner = false;
 			}
-
 			DB::table('mcservers')->insert(
 				array('mcs_uid' => Auth::user()->id,
 					  'mcs_name' => $input['serverName'],
@@ -87,7 +83,7 @@ class PanelController extends BaseController {
 				array('logs_action' => 'New Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
-			if($hasbanner){
+			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
 				$publicpath = public_path('resources/images/minecraft/banners/' . $filename);
 				Image::make($image->getRealPath())->save($publicpath);
@@ -104,8 +100,9 @@ class PanelController extends BaseController {
 	
 	public function postUpdateMCServer()
 	{
+		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100');
+		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'banner' => 'image|image_size:=468,=60');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
@@ -135,9 +132,6 @@ class PanelController extends BaseController {
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
 				
-				$hasbanner = true;
-			} else {
-				$hasbanner = false;
 			}
 
 			DB::table('mcservers')->where('mcs_id', '=', $id->mcs_id)->update(
@@ -155,7 +149,7 @@ class PanelController extends BaseController {
 				array('logs_action' => 'Updated Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
-			if($hasbanner){
+			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
 				$publicpath = public_path() . 'resources/images/minecraft/banners/' . $filename;
 				Image::make($image->getRealPath())->save($publicpath);
