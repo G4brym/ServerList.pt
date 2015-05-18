@@ -59,7 +59,7 @@ class PanelController extends BaseController {
 			if(Input::hasFile('banner')){
 				$image = Input::file('banner');
 
-				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
+				if($image->getClientOriginalExtension() != "jpg" && $image->getClientOriginalExtension() != "png" && $image->getClientOriginalExtension() != "gif"){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
 				
@@ -128,7 +128,7 @@ class PanelController extends BaseController {
 			if(Input::hasFile('banner')){
 				$image = Input::file('banner');
 
-				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
+				if($image->getClientOriginalExtension() != "jpg" && $image->getClientOriginalExtension() != "png" && $image->getClientOriginalExtension() != "gif"){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
 				
