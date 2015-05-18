@@ -104,7 +104,6 @@ class PanelController extends BaseController {
 	
 	public function postUpdateMCServer()
 	{
-		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
 		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100');
 		
