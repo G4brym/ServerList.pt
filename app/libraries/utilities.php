@@ -18,5 +18,19 @@ Class utilities {
 			return false;
 		}
     }
-
+	
+    public static function getMCBanner($id){
+		
+		if(!utilities::MCSVhasBanner($id)){
+			return URL::to('/resources/images/minecraft/banners/default-banner.jpg');
+		} else {
+			if(file_exists(public_path()."/resources/images/minecraft/banners/".$id.".png")){
+				return URL::to('/resources/images/minecraft/banners/'.$id.'.png');
+			} elseif(file_exists(public_path()."/resources/images/minecraft/banners/".$id.".jpg")){
+				return URL::to('/resources/images/minecraft/banners/'.$id.'.jpg');
+			} elseif(file_exists(public_path()."/resources/images/minecraft/banners/".$id.".gif")){
+				return URL::to('/resources/images/minecraft/banners/'.$id.'.gif');
+			}
+		}
+    }
 }
