@@ -85,7 +85,7 @@ class PanelController extends BaseController {
 
 			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
-				$publicpath = public_path('resources/images/minecraft/banners/' . $filename);
+				$publicpath = public_path('/resources/images/minecraft/banners/' . $filename);
 				Image::make($image->getRealPath())->save($publicpath);
 			}
 
@@ -151,7 +151,7 @@ class PanelController extends BaseController {
 
 			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
-				$publicpath = public_path() . 'resources/images/minecraft/banners/' . $filename;
+				$publicpath = public_path() . '/resources/images/minecraft/banners/' . $filename;
 				Image::make($image->getRealPath())->save($publicpath);
 				return Redirect::to(URL::to("/panel/servers"))->With('success', 'Servidor e Banner Atualizado.');
 			}
