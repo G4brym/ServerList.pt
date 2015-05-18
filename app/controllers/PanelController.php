@@ -62,8 +62,12 @@ class PanelController extends BaseController {
 				if($image->getClientOriginalExtension() != "jpg" && $image->getClientOriginalExtension() != "png" && $image->getClientOriginalExtension() != "gif"){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
+				if(!imagecreatefromjpeg(Input::file('banner') && !imagecreatefrompng(Input::file('banner') && !imagecreatefromgif(Input::file('banner')){
+					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Ocorreu um erro com a validação da imagem");
+				}
 				
 			}
+
 			DB::table('mcservers')->insert(
 				array('mcs_uid' => Auth::user()->id,
 					  'mcs_name' => $input['serverName'],
@@ -85,8 +89,18 @@ class PanelController extends BaseController {
 
 			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
-				$publicpath = public_path('/resources/images/minecraft/banners/' . $filename);
-				Image::make($image->getRealPath())->save($publicpath);
+				$publicpath = public_path() . '/resources/images/minecraft/banners/' . $filename;
+				
+				if($image->getClientOriginalExtension() == "jpg"){
+					$newImage = imagecreatefromjpeg(Input::file('banner'));
+					imagejpeg($newImage, public_path() . "/resources/images/minecraft/banners/" . $$id->mcs_id . ".jpg", 100);
+				} elseif($image->getClientOriginalExtension() == "png"){
+					$newImage = imagecreatefrompng(Input::file('banner'));
+					imagejpeg($newImage, public_path() . "/resources/images/minecraft/banners/" . $$id->mcs_id . ".png", 100);
+				} elseif($image->getClientOriginalExtension() == "gif"){
+					$newImage = imagecreatefromgif(Input::file('banner'));
+					imagejpeg($newImage, public_path() . "/resources/images/minecraft/banners/" . $$id->mcs_id . ".gif", 100);
+				}
 			}
 
 			return Redirect::to(URL::to("/panel/servers"))->With('success', 'Servidor Adicionado.');
@@ -131,6 +145,9 @@ class PanelController extends BaseController {
 				if($image->getClientOriginalExtension() != "jpg" && $image->getClientOriginalExtension() != "png" && $image->getClientOriginalExtension() != "gif"){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
+				if(!imagecreatefromjpeg(Input::file('banner') && !imagecreatefrompng(Input::file('banner') && !imagecreatefromgif(Input::file('banner')){
+					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Ocorreu um erro com a validação da imagem");
+				}
 				
 			}
 
@@ -152,7 +169,18 @@ class PanelController extends BaseController {
 			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
 				$publicpath = public_path() . '/resources/images/minecraft/banners/' . $filename;
-				Image::make($image->getRealPath())->save($publicpath);
+				
+				if($image->getClientOriginalExtension() == "jpg"){
+					$newImage = imagecreatefromjpeg(Input::file('banner'));
+					imagejpeg($newImage, public_path() . "/resources/images/minecraft/banners/" . $$id->mcs_id . ".jpg", 100);
+				} elseif($image->getClientOriginalExtension() == "png"){
+					$newImage = imagecreatefrompng(Input::file('banner'));
+					imagejpeg($newImage, public_path() . "/resources/images/minecraft/banners/" . $$id->mcs_id . ".png", 100);
+				} elseif($image->getClientOriginalExtension() == "gif"){
+					$newImage = imagecreatefromgif(Input::file('banner'));
+					imagejpeg($newImage, public_path() . "/resources/images/minecraft/banners/" . $$id->mcs_id . ".gif", 100);
+				}
+				
 				return Redirect::to(URL::to("/panel/servers"))->With('success', 'Servidor e Banner Atualizado.');
 			}
 
