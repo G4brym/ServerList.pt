@@ -62,6 +62,10 @@ class PanelController extends BaseController {
 				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
+				
+				$hasbanner = true;
+			} else {
+				$hasbanner = false;
 			}
 
 			DB::table('mcservers')->insert(
@@ -83,7 +87,7 @@ class PanelController extends BaseController {
 				array('logs_action' => 'New Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
-			if(Input::hasFile('banner')){
+			if($hasbanner){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
 				$publicpath = public_path('resources/images/minecraft/banners/' . $filename);
 				Image::make($image->getRealPath())->save($publicpath);
@@ -131,6 +135,10 @@ class PanelController extends BaseController {
 				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
 					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
+				
+				$hasbanner = true;
+			} else {
+				$hasbanner = false;
 			}
 
 			DB::table('mcservers')->where('mcs_id', '=', $id->mcs_id)->update(
@@ -148,7 +156,7 @@ class PanelController extends BaseController {
 				array('logs_action' => 'Updated Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
-			if(Input::hasFile('banner')){
+			if($hasbanner){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
 				$publicpath = public_path() . 'resources/images/minecraft/banners/' . $filename;
 				Image::make($image->getRealPath())->save($publicpath);
