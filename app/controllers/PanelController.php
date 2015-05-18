@@ -125,7 +125,7 @@ class PanelController extends BaseController {
 				$input['serverV'] = 0;
 			}
 			
-			if(null !== Input::file('banner')){
+			if(Input::file('banner') != null){
 				$image = Input::file('banner');
 
 				if($image->getClientOriginalExtension != "jpg" && $image->getClientOriginalExtension != "png" && $image->getClientOriginalExtension != "gif"){
@@ -148,7 +148,7 @@ class PanelController extends BaseController {
 				array('logs_action' => 'Updated Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
 			);
 
-			if(null !== Input::file('banner')){
+			if(Input::file('banner') != null){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
 				$publicpath = public_path() . 'resources/images/minecraft/banners/' . $filename;
 				Image::make($image->getRealPath())->save($publicpath);
