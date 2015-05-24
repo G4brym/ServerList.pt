@@ -121,16 +121,16 @@ class PanelController extends BaseController {
 			
 			$id = DB::table('mcservers')->where('mcs_id', '=', $input['sid'])->where('mcs_uid', '=', Auth::user()->id)->first();
 			if(!count($id)){
-				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Ocorreu um erro com a validação do servidor");
+				return Redirect::to(URL::to("/panel/servers"))->withInput()->WithErrors("Ocorreu um erro com a validação do servidor");
 			}
 			
 			if(isset($input['serverV'])){
 				$input['serverV'] = 1;
 				if($input['serverVPort'] == null){
-					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a porta");
+					return Redirect::to(URL::to("/panel/minecraft/" . $id))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a porta");
 				}
 				if($input['serverVPKey'] == null){
-					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a Public Key");
+					return Redirect::to(URL::to("/panel/minecraft/" . $id))->withInput()->WithErrors("Para ativar o Votifier tens de preencher a Public Key");
 				}
 			} else {
 				$input['serverV'] = 0;
@@ -140,7 +140,7 @@ class PanelController extends BaseController {
 				$image = Input::file('banner');
 
 				if($image->getClientOriginalExtension() != "jpg" && $image->getClientOriginalExtension() != "png" && $image->getClientOriginalExtension() != "gif"){
-					return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
+					return Redirect::to(URL::to("/panel/minecraft/" . $id))->withInput()->WithErrors("As extenções permitidas para os banners são .jpg, .png e .gif");
 				}
 				
 			}
@@ -182,7 +182,7 @@ class PanelController extends BaseController {
 
 		} else {
 
-			return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors($v);
+			return Redirect::to(URL::to("/panel/servers"))->withInput()->WithErrors($v);
 
 		}
 	}
