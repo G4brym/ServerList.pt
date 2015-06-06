@@ -30,7 +30,7 @@ if($mcserver->mcs_maxplayers == 0){
 	<meta property="og:description" content="Os Melhores Servidores Tugas Num Unico Sitio">
 
 	<meta property="twitter:card" content="summary_large_image">
-	<meta property="twitter:image:src" content="{{ URL::to('/resources/images/website/logo-medium.png') }}">
+	<meta property="twitter:image:src" content="{{ URL::to('/resources/images/website/serverlist.jpg') }}">
 	<meta property="twitter:site" content="@serverlistpt">
 	<meta property="twitter:title" content="{{$title}}">
 	<meta property="twitter:description" content="Os Melhores Servidores Tugas Num Unico Sitio">
