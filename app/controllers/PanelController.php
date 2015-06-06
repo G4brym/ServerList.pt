@@ -64,6 +64,10 @@ class PanelController extends BaseController {
 				}
 				
 			}
+			
+			if(!mcservers::isOnline($input['serverIp'], $input['serverPort'])) {
+				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("O servidor precisa de estar online para poder ser registado");
+			}
 
 			DB::table('mcservers')->insert(
 				array('mcs_uid' => Auth::user()->id,
