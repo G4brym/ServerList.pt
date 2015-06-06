@@ -149,9 +149,15 @@ class PanelController extends BaseController {
 				
 			}
 			
-			unlink(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".jpg");
-			unlink(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".png");
-			unlink(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".gif");
+			if(file_exists(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".jpg")){
+				unlink(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".jpg");
+			}
+			if(file_exists(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".png")){
+				unlink(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".png");
+			}
+			if(file_exists(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".gif")){
+				unlink(public_path() . "/resources/images/minecraft/banners/". $input['sid'] . ".gif");
+			}
 
 			DB::table('mcservers')->where('mcs_id', '=', $id->mcs_id)->update(
 				array('mcs_name' => $input['serverName'],
