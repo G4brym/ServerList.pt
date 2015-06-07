@@ -25,7 +25,7 @@ if($mcserver->mcs_maxplayers == 0){
 	<meta property="fb:app_id" content="643780505722155" />
 	
 	<meta property="og:title" content="{{$title}}">
-	<meta property="og:type" content="website">
+	<meta property="og:type" content="server">
 	<meta property="og:image" content="{{ URL::to('/resources/images/website/serverlist.jpg') }}">
 	<meta property="og:site_name" content="Serverlist.pt">
 	<meta property="og:description" content="Os Melhores Servidores Tugas Num Unico Sitio">
