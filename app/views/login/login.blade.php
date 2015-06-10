@@ -43,6 +43,12 @@
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
              							{{Form::password('password', array('placeholder' => 'Password', 'class'=>'form-control', 'required' => 'required', 'minlength' => '6'))}}
                                     </div>
+									
+                            <div style="margin-bottom: 25px;">
+										<center>
+             							{{Form::captcha()}}
+										</center>
+                                    </div>
 
 
                                 <div style="margin-top:10px" class="form-group">

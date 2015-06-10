@@ -43,7 +43,7 @@ $i = $skip + 1;
 						<tbody>
 							@foreach($premiumServers as $server)
 								<tr>
-									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="{{ utilities::getMCBanner($server->mcs_id) }}" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script></td>
+									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="{{ utilities::getMCBanner($server->mcs_id) }}" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script> <span class="label label-primary" style="background-color: #4caf50;">{{ $server->mcs_version }}</span></td>
 									<td>{{ $server->mcs_players }}/{{ $server->mcs_maxplayers }}<br><br>Emanuel, Joaquim ...</td>
 									<td><script>document.write(uptime({{ $server->mcs_uptime }}));</script></td>
 									<td><span class="label label-success">Spigot</span> <span class="label label-primary">MiniGames</span></td>
@@ -74,7 +74,7 @@ $i = $skip + 1;
 						<tbody>
 							@foreach($normalServers as $server)
 								<tr>
-									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="{{ utilities::getMCBanner($server->mcs_id) }}" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script> <span class="label label-info">Rank: {{ $i++ }}</span></td>
+									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="{{ utilities::getMCBanner($server->mcs_id) }}" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script> <span class="label label-primary" style="background-color: #4caf50;">{{ $server->mcs_version }}</span> <span class="label label-info">Rank: {{ $i++ }}</span></td>
 									<td>{{ $server->mcs_players }}/{{ $server->mcs_maxplayers }}<br><br>Emanuel, Joaquim ...</td>
 									<td><script>document.write(uptime({{ $server->mcs_uptime }}));</script></td>
 									<td>{{ $server->mcs_mvotes }}</td>

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://port-80.238znxu2khme7b9eib2brqedsegsyvis6rr548j3rawz5mi.box.codeanywhere.com/ServerList/public/',
+	'url' => 'https://www.serverlist.pt/',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -73,7 +73,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				  </tr>
 				  <tr>
 					<th scope="row">Versão</th>
-					<td>{{ $server->mcs_version }}</td>
+					<td><span class="label label-info">{{ $server->mcs_version }}</span></td>
 				  </tr>
 				  <tr>
 					<th scope="row">UpTime</th>

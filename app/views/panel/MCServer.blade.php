@@ -62,6 +62,12 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 								<span class="label label-warning">Ex: play.mydomain.com</span>
 							  </div>
 							</div>
+						<div class="form-group">
+							  <label for="serverVersion" class="col-lg-2 control-label">Versão</label>
+							  <div class="col-lg-2">
+								{{ Form::select('serverVersion', mcservers::getVersions(), null, ['class' => 'form-control']) }}
+							  </div>
+							</div>
 							<hr>
 							<h3 class="col-md-offset-2">Votifier <small><a href="http://dev.bukkit.org/server-mods/votifier/">(http://dev.bukkit.org/server-mods/votifier/)</a></small></h3>
 							<div class="form-group">
@@ -93,6 +99,12 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 								</div>
 							</div>
 							<hr>
+							<div class="form-group">
+							  <label for="serverVPKey" class="col-lg-2 control-label">Captcha</label>
+							  <div class="col-lg-10">
+								{{Form::captcha()}}
+							  </div>
+							</div>
 							{{Form::submit('Guardar Servidor', array('class'=>'btn btn-success col-md-offset-2'))}}
 							<div class="pull-right"><span style="color: #f44336; font-size: 150%;">*</span> = obrigatório</div>
 						{{ Form::close() }}

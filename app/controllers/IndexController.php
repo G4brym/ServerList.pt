@@ -9,13 +9,13 @@ class IndexController extends BaseController {
 		} else {
 			$user = Auth::user();
 		}
-		$title=settings::get("siteName") . " - " . $user->firstName . " " . $user->lastName;
+		$title=settings::get("siteName") . " - " . $user->name;
 		return View::make('index.userProfile')->with('title', $title)->with('id', $user->id);
 	}
 
 	public function showOwnUser()
 	{
-		$title=settings::get("siteName") . " - " . Auth::user()->firstName . " " . Auth::user()->lastName;
+		$title=settings::get("siteName") . " - " . Auth::user()->name;
 		return View::make('index.userProfile')->with('title', $title)->with('id', Auth::user()->id);
 	}
 	

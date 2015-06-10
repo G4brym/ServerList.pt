@@ -34,7 +34,7 @@ class PanelController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'banner' => 'image|image_size:=468,=60');
+		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'serverVersion' => 'required', 'banner' => 'image|image_size:=468,=60', 'g-recaptcha-response' => 'required|recaptcha');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
@@ -42,6 +42,10 @@ class PanelController extends BaseController {
 			
 			if(count(DB::table('mcservers')->where('mcs_ip', '=', $input['serverIp'])->where('mcs_port', '=', $input['serverPort'])->first())){
 				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("O IP deste servidor já está registado, entra em contacto com a staff se achas que isto é um erro");
+			}
+			
+			if(mcservers::getVersion($input['serverVersion']) == false) {
+				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Ocorreu um erro com a validação da versão");
 			}
 			
 			if(isset($input['serverV'])){
@@ -78,15 +82,14 @@ class PanelController extends BaseController {
 					  'mcs_ip' => $input['serverIp'],
 					  'mcs_port' => $input['serverPort'],
 					  'mcs_aliase' => $input['serverAliase'],
+					  'mcs_version' => $input['serverVersion'],
 					  'mcs_votifier' => $input['serverV'],
 					  'mcs_vport' => $input['serverVPort'],
 					  'mcs_votifierkey' => $input['serverVPKey'])
 			);
 
 			$id = DB::table('mcservers')->where('mcs_ip', '=', $input['serverIp'])->where('mcs_port', '=', $input['serverPort'])->first();
-			DB::table('logs')->insert(
-				array('logs_action' => 'New Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
-			);
+			utilities::log("New Minecraft Server " . $id->mcs_id);
 
 			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
@@ -117,7 +120,7 @@ class PanelController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'banner' => 'image|image_size:=468,=60');
+		$rules = array('serverName' => 'required|max:100', 'serverDesc' => 'required|max:255', 'serverIp' => 'max:35', 'serverPort' => 'max:6', 'serverAliase' => 'max:100', 'serverVersion' => 'required', 'banner' => 'image|image_size:=468,=60', 'g-recaptcha-response' => 'required|recaptcha');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
@@ -126,6 +129,10 @@ class PanelController extends BaseController {
 			$id = DB::table('mcservers')->where('mcs_id', '=', $input['sid'])->where('mcs_uid', '=', Auth::user()->id)->first();
 			if(!count($id)){
 				return Redirect::to(URL::to("/panel/servers"))->withInput()->WithErrors("Ocorreu um erro com a validação do servidor");
+			}
+			
+			if(mcservers::getVersion($input['serverVersion']) == false) {
+				return Redirect::to(URL::to("/panel/minecraft/new"))->withInput()->WithErrors("Ocorreu um erro com a validação da versão");
 			}
 			
 			if(isset($input['serverV'])){
@@ -165,14 +172,13 @@ class PanelController extends BaseController {
 					  'mcs_website' => $input['serverSite'],
 					  'mcs_msg' => $input['serverMsg'],
 					  'mcs_aliase' => $input['serverAliase'],
+					  'mcs_version' => $input['serverVersion'],
 					  'mcs_votifier' => $input['serverV'],
 					  'mcs_vport' => $input['serverVPort'],
 					  'mcs_votifierkey' => $input['serverVPKey'])
 			);
 
-			DB::table('logs')->insert(
-				array('logs_action' => 'Updated Server ' . $id->mcs_id, 'logs_userId' => Auth::User()->id, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
-			);
+			utilities::log("Updated Minecraft Server " . $id->mcs_id);
 
 			if(Input::hasFile('banner')){
 				$filename  = $id->mcs_id . '.' . $image->getClientOriginalExtension();
@@ -197,6 +203,43 @@ class PanelController extends BaseController {
 		} else {
 
 			return Redirect::to(URL::to("/panel/servers"))->withInput()->WithErrors($v);
+
+		}
+	}
+	
+	public function postChangePW()
+	{
+		$input = Input::all();
+		$rules = array('oldpassword' => 'required|min:6|max:20', 'newpassword' => 'required|min:6|max:20', 'g-recaptcha-response' => 'required|recaptcha');
+		$v = Validator::make($input, $rules);
+		if ($v->passes())
+		{
+
+			$oldpassword = $input['oldpassword'];
+			$oldpasswordsql = Auth::user()->password;
+
+			if($oldpassword && !Hash::check($oldpassword, $oldpasswordsql))
+			{
+
+			return Redirect::to('user')->WithErrors('Password Antiga Errada');
+
+			} else {
+
+			$newpassword = $input['newpassword'];
+			$newpassword = Hash::make($newpassword);
+
+			DB::table('users')->where('id', '=', Auth::user()->id)->update(
+				array('password' => $newpassword)
+			);
+
+			utilities::log("Password Changed");
+
+			return Redirect::to(URL::to("/user"))->With('success', 'Password Atualizada');
+			
+			}
+		} else {
+
+			return Redirect::to(URL::to("/user"))->WithErrors($v);
 
 		}
 	}

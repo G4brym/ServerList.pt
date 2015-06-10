@@ -10,6 +10,18 @@ Class utilities {
 		}
     }
 	
+    public static function log ($action, $userid = null){
+		
+		if($userid == null){
+			$userid = Auth::User()->id;
+		}
+		
+		DB::table('logs')->insert(
+		    array('logs_action' => $action, 'logs_userId' => $userid, 'logs_ip' => $_SERVER["HTTP_CF_CONNECTING_IP"])
+		);
+	
+    }
+	
     public static function MCSVhasBackground($id){
 		
 		if(file_exists(public_path()."/resources/images/minecraft/background/".$id.".jpg")){

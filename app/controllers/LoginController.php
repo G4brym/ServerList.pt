@@ -30,7 +30,7 @@ class LoginController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('email' => 'required|email', 'password' => 'required');
+		$rules = array('email' => 'required|email', 'password' => 'required|min:6|max:20', 'g-recaptcha-response' => 'required|recaptcha');
 		$v = Validator::make($input, $rules);
 		if($v->passes())
 		{
@@ -52,9 +52,7 @@ class LoginController extends BaseController {
 					return Redirect::to(URL::to("/login"))->withErrors('Esta conta foi desativada, Com a seguinte razão '.$reason);
 				}
 
-				DB::table('logs')->insert(
-				    array('logs_action' => 'Login', 'logs_userId' => Auth::user()->id, 'logs_ip' => "inserir mais tarde ip da cloudflare")
-				);
+				utilities::log("Login");
 
 				return Redirect::to(URL::to("/"));
 
@@ -72,7 +70,7 @@ class LoginController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('regName' => 'required|max:40', 'regEmail' => 'required|email|max:40', 'regPassword' => 'required|min:6|max:20');
+		$rules = array('regName' => 'required|max:40', 'regEmail' => 'required|email|max:40', 'regPassword' => 'required|min:6|max:20', 'g-recaptcha-response' => 'required|recaptcha');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
@@ -99,9 +97,7 @@ class LoginController extends BaseController {
 			$user->save();
 
 			$id = DB::table('users')->where('email', '=', $input['regEmail'])->first();
-			DB::table('logs')->insert(
-			    array('logs_action' => 'Register', 'logs_userId' => $id->id, 'logs_ip' => "inserir mais tarde ip da cloudflare")
-			);
+			utilities::log("Login", $id->id);
 
 			return Redirect::to(URL::to("/login"))->With('success', 'Conta criada, Verifica a tua conta com o link que te foi enviado por Email.');
 

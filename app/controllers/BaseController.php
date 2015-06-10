@@ -54,11 +54,20 @@ class BaseController extends Controller {
 			}
 			
 			if($server->mcs_votifier == 1){
-				$votifier = Votifier::newVote($server->mcs_vip, $server->mcs_vport, $server->mcs_votifierkey, $input['MCUsername']);
+				$votifier = Votifier::newVote($server->mcs_ip, $server->mcs_vport, $server->mcs_votifierkey, $input['MCUsername']);
 				
 				if($votifier == false){
 					return Redirect::to('/minecraft/'.$sid)->withErrors("Não foi possivel enviar o voto para o servidor, porfavor contacta o admininstrador do mesmo");
 				}
+			}
+			
+			if (Auth::check()) {
+				DB::table('users')->where('id', Auth::user()->id)->update(
+					array('votes' => Auth::user()->votes + 1
+				));
+				
+				utilities::log("Voted On Server " . $server->mcs_name);
+				
 			}
 			
 			DB::table('mcservers')->where('mcs_id', $sid)->update(
