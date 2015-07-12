@@ -28,13 +28,30 @@ $mcservers = DB::table('mcservers')->where('mcs_uid', '=', Auth::User()->id)->ge
 						</thead>
 						<tbody>
 							@foreach($mcservers as $server)
-								<tr>
-									<td><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}"><img src="{{ utilities::getMCBanner($server->mcs_id) }}" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script></td>
-									<td>{{ $server->mcs_players }}/{{ $server->mcs_maxplayers }}<br><br>Emanuel, Joaquim ...</td>
+									<td><a href="{{ URL::to('minecraft/'.$server->mcs_id) }}"><img src="{{ utilities::getMCBanner($server->mcs_id) }}" alt="Server Banner" height="60" width="468"></a><br><?php if($server->mcs_aliase == null){ echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_ip.':'.$server->mcs_port.'</span>'; } else { echo'<span class="label label-default" style="background: #3f51b5;">'.$server->mcs_aliase.':'.$server->mcs_port.'</span>'; } ?> <script>document.write(status({{ $server->mcs_status }}));</script> <span class="label label-primary" style="background-color: #4caf50;">{{ $server->mcs_version }}</span></td>
+									<td>{{ $server->mcs_players }}/{{ $server->mcs_maxplayers }}</td>
 									<td><script>document.write(uptime({{ $server->mcs_uptime }}));</script></td>
 									<td>{{ $server->mcs_mvotes }}</td>
-									<td><center><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar Servidor</a><br><br><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}" class="btn btn-danger"><i class="fa fa-pencil"></i> Apagar Servidor</a></center></td>
+									<td><center><a href="{{ URL::to('/panel/minecraft/'.$server->mcs_id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar Servidor</a><br><br><button type="button" class="btn btn-danger" onClick="deleteServer{{$server->mcs_id}}()"><i class="fa fa-pencil"></i> Apagar Servidor</button></center></td>
 								</tr>
+								<!-- Script do evento -->
+								<script>
+								function deleteServer{{$server->mcs_id}}() {
+								swal({
+										  title: "Tens a certeza?",
+										  text: "O Servidor Será Removido.",
+										  type: "warning",
+										  showCancelButton: true,
+										  confirmButtonColor: "#DD6B55",
+										  confirmButtonText: "Sim, Remova o Servidor!",
+										  closeOnConfirm: false
+										},
+										function(){
+										  var url = document.URL + "/remove?id={{$server->mcs_id}}&game=minecraft";
+										  window.location.href = url; 
+										});
+								};
+								</script>
 							@endforeach
 						</tbody>
 					</table>

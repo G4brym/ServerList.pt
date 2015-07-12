@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.16",
 		"greggilbert/recaptcha": "dev-master",
 		"cviebrock/image-validator": "1.0.*",
-		"intervention/image": "2.*"
+		"intervention/image": "2.*",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [

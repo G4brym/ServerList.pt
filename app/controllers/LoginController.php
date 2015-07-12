@@ -70,7 +70,7 @@ class LoginController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('regName' => 'required|max:40', 'regEmail' => 'required|email|max:40', 'regPassword' => 'required|min:6|max:20', 'g-recaptcha-response' => 'required|recaptcha');
+		$rules = array('regName' => 'required|max:40', 'regEmail' => 'required|email|max:40', 'regPassword' => 'required|min:6|max:20');
 		
 		$v = Validator::make($input, $rules);
 		if ($v->passes())
@@ -82,18 +82,21 @@ class LoginController extends BaseController {
 				
 			$password = $input['regPassword'];
 			$password = Hash::make($password);
+			
+			$code = str_random(15);
 
-			$data = array('email' => $input['regEmail'], 'name' => $input['regtName']);
+			$data = array('email' => $input['regEmail'], 'name' => $input['regName']);
 
-			//Mail::send('emails.welcome', array('username' => $data['username'], 'code' => $code), function($message) use ($data)
-			//{
-			//    $message->to($data['email'])->subject('Bem vindo!');
-			//});
+			Mail::send('emails.welcome', array('username' => $data['name'], 'code' => $code, 'email' => $data['email']), function($message) use ($data)
+			{
+			    $message->to($data['email'])->subject('Bem vindo!');
+			});
 
 			$user = new User();
 			$user->email = $input['regEmail'];
 			$user->name = $input['regName'];
 			$user->password = $password;
+			$user->activation_token = $code;
 			$user->save();
 
 			$id = DB::table('users')->where('email', '=', $input['regEmail'])->first();
@@ -112,7 +115,7 @@ class LoginController extends BaseController {
 	{
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
-		$rules = array('email' => 'required|email', 'code' => 'required');
+		$rules = array('email' => 'required|email', 'code' => 'required', 'g-recaptcha-response' => 'required|recaptcha');
 		$v = Validator::make($input, $rules);
 		if($v->passes())
 		{
@@ -124,7 +127,7 @@ class LoginController extends BaseController {
 				$user->activation_token = '';
 				$user->activated = 1;
 				$user->save();
-				return Redirect::to(URL::to('/'))->With('success', 'Conta ativada, Podes agora fazer Login.');
+				return Redirect::to(URL::to('/login'))->With('success', 'Conta ativada, Podes agora fazer Login.');
 					
 				} else {
 					

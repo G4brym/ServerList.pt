@@ -15,7 +15,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 							<div class="form-group">
 							  <label for="serverDesc" class="col-lg-2 control-label">Descrição<span style="color: #f44336; font-size: 120%;">*</span></label>
 							  <div class="col-lg-4">
-								{{ Form::text('serverDesc', $server->mcs_desc, array('class' => 'form-control', 'maxlength' => '255', 'required' => 'required')) }}
+								{{ Form::textarea('serverDesc', $server->mcs_desc, array('class' => 'form-control', 'maxlength' => '255', 'required' => 'required', 'rows' => '5', 'style' => 'resize: vertical;')) }}
 							  </div>
 							</div>
 							<div class="form-group">
@@ -36,9 +36,36 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 							  <div class="col-lg-4">
 								  {{ Form::file('banner') }}
 								  <span class="label label-warning">A resolução têm de ser de 468x60 pixels. O ficheiro pode ter no maximo 1MB. As extenções permitidas para os banners são .jpg, .png e .gif</span>
-								  <span class="label label-danger">Se quiser manter o banner atual, não selecione nada neste campo</span> 
+								  <span class="label label-danger">Se quiser manter o Banner atual, não selecione nada neste campo</span> 
 							 </div>
 							</div>
+							@if($server->mcs_premium == 1)
+							<div class="well well-sm">
+								<div class="form-group">
+								  <label for="serverV" class="col-lg-2 control-label">Ativar Header</label>
+								  <div class="col-lg-10">
+									<div class="header">
+									  <label>
+										@if($server->mcs_header == 0)
+											{{ Form::checkbox('header', 1, false, ['id' => 'header']) }}
+										@else
+											{{ Form::checkbox('header', 1, true, ['id' => 'header', 'checked' => 'checked']) }}
+										@endif
+									  </label><br>
+									  <span class="label label-warning">Se quiser desativar o Header da pagina do servidor pode faze-lo aqui.</span> 
+									</div>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label for="background" class="col-lg-2 control-label">Background</label>
+								  <div class="col-lg-4">
+									  {{ Form::file('background') }}
+									  <span class="label label-warning">A resolução têm de ser no minimo 1000x350 pixels. O ficheiro pode ter no maximo 2MB. A única extenção permitida para os Backgrounds é .jpg</span>
+									  <span class="label label-danger">Se quiser manter o Background atual, não selecione nada neste campo</span> 
+								 </div>
+								</div>
+							</div>
+							@endif
 							<hr>
 							<h3 class="col-md-offset-2">Servidor</h3>
 							<div class="form-group">
@@ -62,10 +89,125 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 								<span class="label label-warning">Ex: play.mydomain.com</span>
 							  </div>
 							</div>
-						<div class="form-group">
+							<div class="form-group">
 							  <label for="serverVersion" class="col-lg-2 control-label">Versão</label>
 							  <div class="col-lg-2">
 								{{ Form::select('serverVersion', mcservers::getVersions(), null, ['class' => 'form-control']) }}
+							  </div>
+							</div>
+							<hr>
+							<h3 class="col-md-offset-2">Etiquetas</h3>
+							<div class="form-group">
+							  <label for="serverType" class="col-lg-2 control-label">Tipo de Servidor</label>
+							  <div class="col-lg-2">
+								{{ Form::select('serverType', mcservers::getServerTypes(), $server->mcs_serverType, ['class' => 'form-control']) }}
+							  </div>
+							</div>
+							<div class="form-group">
+							  <label class="col-lg-2 control-label">Tags</label>
+							  <div class="col-lg-10">
+								<div class="panel panel-danger">
+								  <div class="panel-body">
+								  
+									  <div class="row">
+										<div class="form-group">
+										  <label for="serverType" class="col-lg-2 control-label">Adventure</label>
+										  <div class="col-lg-10">
+											<div class="checkbox">
+											  <label>
+												@if($server->mcs_tagAdventure == 0)
+													{{ Form::checkbox('tagAdventure', 1, false) }}
+												@else
+													{{ Form::checkbox('tagAdventure', 1, true, ['checked' => 'checked']) }}
+												@endif
+											  </label>
+										  </div>
+										</div>
+									  </div>
+									  </div>
+									  <div class="row">
+										<div class="form-group">
+										  <label for="serverType" class="col-lg-2 control-label">Creative</label>
+										  <div class="col-lg-10">
+											<div class="checkbox">
+											  <label>
+												@if($server->mcs_tagCreative == 0)
+													{{ Form::checkbox('tagCreative', 1, false) }}
+												@else
+													{{ Form::checkbox('tagCreative', 1, true, ['checked' => 'checked']) }}
+												@endif
+											  </label>
+										  </div>
+										</div>
+									  </div>
+									  </div>
+									  <div class="row">
+										<div class="form-group">
+										  <label for="serverType" class="col-lg-2 control-label">MiniGames</label>
+										  <div class="col-lg-10">
+											<div class="checkbox">
+											  <label>
+												@if($server->mcs_tagMinigames == 0)
+													{{ Form::checkbox('tagMinigames', 1, false) }}
+												@else
+													{{ Form::checkbox('tagMinigames', 1, true, ['checked' => 'checked']) }}
+												@endif
+											  </label>
+										  </div>
+										</div>
+									  </div>
+									  </div>
+									  <div class="row">
+										<div class="form-group">
+										  <label for="serverType" class="col-lg-2 control-label">Prison</label>
+										  <div class="col-lg-10">
+											<div class="checkbox">
+											  <label>
+												@if($server->mcs_tagPrison == 0)
+													{{ Form::checkbox('tagPrison', 1, false) }}
+												@else
+													{{ Form::checkbox('tagPrison', 1, true, ['checked' => 'checked']) }}
+												@endif
+											  </label>
+										  </div>
+										</div>
+									  </div>
+									  </div>
+									  <div class="row">
+										<div class="form-group">
+										  <label for="serverType" class="col-lg-2 control-label">Survival</label>
+										  <div class="col-lg-10">
+											<div class="checkbox">
+											  <label>
+												@if($server->mcs_tagSurvival == 0)
+													{{ Form::checkbox('tagSurvival', 1, false) }}
+												@else
+													{{ Form::checkbox('tagSurvival', 1, true, ['checked' => 'checked']) }}
+												@endif
+											  </label>
+										  </div>
+										</div>
+									  </div>
+									  </div>
+									  <div class="row">
+										<div class="form-group">
+										  <label for="serverType" class="col-lg-2 control-label">Whitelist</label>
+										  <div class="col-lg-10">
+											<div class="checkbox">
+											  <label>
+												@if($server->mcs_tagWhitelist == 0)
+													{{ Form::checkbox('tagWhitelist', 1, false) }}
+												@else
+													{{ Form::checkbox('tagWhitelist', 1, true, ['checked' => 'checked']) }}
+												@endif
+											  </label>
+										  </div>
+										</div>
+									  </div>
+									  </div>
+										
+								  </div>
+								</div>
 							  </div>
 							</div>
 							<hr>

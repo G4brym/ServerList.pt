@@ -8,7 +8,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Os Melhores Servidores Tugas Num Unico Sitio">
-	<meta name="author" content="G4brym">
 	<meta name="keywords" content="minecraft, minecraft server list, serverlist, minecraft servers, minecraft server info, minecraft serverlist, minecraft top list, minecraft toplist, best minecraft servers, serverlist.pt, serverlist pt, serverlist portugal, servidores em portugal, servidores de portugal, lista de servidores, lista de servidores de portugal, servidores de minecraft, servidores de csgo, servidores de cs, csgo server list, csgo serverlist, svl, svl pt, svlpt">
 	<meta name="language" content="pt-PT">
 	
@@ -29,10 +28,6 @@
 	<meta property="twitter:description" content="Os Melhores Servidores Tugas Num Unico Sitio">
 
 	<title>{{$title}}</title>
-
-	<!-- SweetAlert -->
-	{{ HTML::script(URL::to('/resources/sweetalert/sweet-alert.js')) }}
-	{{ HTML::style(URL::to('/resources/sweetalert/sweet-alert.css')) }}
 	
 	<!-- Bootstrap Core CSS -->
 	{{ HTML::style(URL::to('/resources/bootstrap/css/bootstrap.css')) }}
@@ -62,6 +57,23 @@
 		</div>
 	</div>
 
+	<!-- SweetAlert -->
+	{{ HTML::script(URL::to('/resources/sweetalert/sweet-alert.js')) }}
+	{{ HTML::style(URL::to('/resources/sweetalert/sweet-alert.css')) }}
+		
+	<!-- Infos -->
+    @if(Session::has('success'))
+		<script>sweetAlert("Sucesso!", "{{ Session::get('success') }}", "success");</script>
+    @endif
+    @if($errors->any())
+		<script>
+			var str = "{{implode('', $errors->all(':message '))}}";
+			var res = str.replace("validation.required", "Não preencheste o recaptcha");
+			sweetAlert("Oops...", res, "error");
+		</script>
+    @endif
+    <!-- /Infos -->
+	
 	<!-- jQuery -->
 	{{ HTML::script(URL::to('/resources/js/jquery.js')) }}
 
@@ -70,6 +82,8 @@
 	{{ HTML::script(URL::to('/resources/js/jqBootstrapValidation.js')) }}
 	
 	{{ HTML::script(URL::to('/resources/js/panel.js')) }}
+	
+	@yield('js')
 
 </body>
 

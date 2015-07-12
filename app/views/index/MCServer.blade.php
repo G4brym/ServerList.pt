@@ -9,21 +9,32 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 	padding-bottom: 10px;
 	text-align: left;
 	color: #f8f8f8;
-	background: url(<?php if(!utilities::MCSVhasbackground($server->mcs_id)){ echo URL::to('/resources/images/minecraft/backgrounds/default-background.jpg'); } else { echo URL::to('/resources/images/minecraft/backgrounds/'.$server->mcs_id.'.jpg'); } ?>) no-repeat center center;
+	background:     linear-gradient(
+      rgba(0, 0, 0, 0.25), 
+      rgba(0, 0, 0, 0.25)
+    ),
+	url(<?php 
+	if(!utilities::MCSVhasbackground($server->mcs_id)){ 
+		echo URL::to('/resources/images/minecraft/backgrounds/default-background.jpg'); 
+	} else { 
+		echo URL::to('/resources/images/minecraft/backgrounds/'.$server->mcs_id.'.jpg'); 
+	} 
+	?>) no-repeat center center;
 }
 </style>
 @stop
 @section('header')
+@if($server->mcs_header == 1)
 	<!-- Header Carousel -->
 	<header>
 		<div class="top-img">
-			<div class="container">
+			<div class="container server-background">
 
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="intro-message pull-left">
-							<h2 style="color: #3949ab;"><strong>{{ $server->mcs_name }}</strong></h1><br>
-							<h3 style="color: #4caf50;">{{ $server->mcs_msg }}<?php if(isset($server->mcs_website)){ echo '<small> - <a href ="' . $server->mcs_website . '" target="_blank">' . $server->mcs_website . '</a></small>'; } ?></h3>
+							<h2 style="color: #f5f5f5;"><strong>{{ $server->mcs_name }}</strong></h1><br>
+							<h3 style="color: #e0e0e0;"><font face="Roboto_Condensed">{{ $server->mcs_msg }}<?php if(isset($server->mcs_website)){ echo '<small> - <a href ="' . $server->mcs_website . '" target="_blank">' . $server->mcs_website . '</a></small>'; } ?></font></h3>
 						</div>
 					</div>
 				</div>
@@ -34,6 +45,7 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 		</div>
 		<!-- /.intro-header -->
 	</header>
+@endif
 @stop
 @section('body')
 <div class="row">
@@ -78,6 +90,18 @@ $server = DB::table('mcservers')->where('mcs_id', '=', $id)->first();
 				  <tr>
 					<th scope="row">UpTime</th>
 					<td><script>document.write(uptime({{ $server->mcs_uptime }}));</script></td>
+				  </tr>
+				  <tr>
+					<th scope="row">Etiquetas</th>
+					<td>
+						<span class="label" style="background-color: #009688;">{{ mcservers::getServerType($server->mcs_serverType) }}</span>
+						<script>document.write(tags({{ $server->mcs_tagAdventure }}, 'Adventure'));</script>
+						<script>document.write(tags({{ $server->mcs_tagCreative }}, 'Creative'));</script>
+						<script>document.write(tags({{ $server->mcs_tagMinigames }}, 'MiniGames'));</script>
+						<script>document.write(tags({{ $server->mcs_tagPrison }}, 'Prison'));</script>
+						<script>document.write(tags({{ $server->mcs_tagSurvival }}, 'Survival'));</script>
+						<script>document.write(tags({{ $server->mcs_tagWhitelist }}, 'Whitelist'));</script>
+					</td>
 				  </tr>
 				</tbody>
 			  </table>

@@ -1,6 +1,47 @@
 <?php
 Class utilities {
 
+    public static function clearCloudflareImageBackground($id, $game){
+		
+		$url = 'https://api.cloudflare.com/client/v4/zones/40eb82fbbe2f186919d09a09eb4566d1/purge_cache';
+
+		$curl_options = array(
+			CURLOPT_VERBOSE        => false,
+			CURLOPT_FORBID_REUSE   => true,
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_HEADER         => false,
+			CURLOPT_TIMEOUT        => 5,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_FOLLOWLOCATION => true
+		);
+		
+		switch ($game) {
+			case "minecraft":
+				$data = array("files" => ["https://www.serverlist.pt/resources/images/minecraft/backgrounds/".$id.".jpg"]);
+				break;
+			case csgo:
+				$data = array("files" => ["https://www.serverlist.pt/resources/images/minecraft/backgrounds/".$id.".jpg"]);
+				break;
+		}
+
+		$headers = array("X-Auth-Email: g4bryrm98@hotmail.com", "X-Auth-Key: a29025fc9dcffc8390257cd17b5bf1383be6e");
+
+		$ch = curl_init();
+
+		curl_setopt_array($ch, $curl_options);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+		$headers[] = "Content-type: application/json";
+
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_URL, $url);
+
+		$test = curl_exec($ch);
+
+		curl_close($ch);
+
+    }
+	
     public static function MCSVhasBanner($id){
 		
 		if(file_exists(public_path()."/resources/images/minecraft/banners/".$id.".png") || file_exists(public_path()."/resources/images/minecraft/banners/".$id.".jpg") || file_exists(public_path()."/resources/images/minecraft/banners/".$id.".gif")){
@@ -24,7 +65,7 @@ Class utilities {
 	
     public static function MCSVhasBackground($id){
 		
-		if(file_exists(public_path()."/resources/images/minecraft/background/".$id.".jpg")){
+		if(file_exists(public_path()."/resources/images/minecraft/backgrounds/".$id.".jpg")){
 			return true;
 		} else {
 			return false;

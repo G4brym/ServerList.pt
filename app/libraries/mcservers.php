@@ -94,6 +94,35 @@ Class mcservers {
 
 	}
 	
+    public static function getServerTypes(){
+		
+		$types = array(   "1" => "Vanilla",
+						  "2" => "Bukkit",
+					   	  "3" => "Spigot",
+					   	  "4" => "Forge",
+					   	  "5" => "Cauldron",
+					   	  "6" => "BungeeCord",
+					   	  "7" => "Sponge");
+		
+		return $types;
+	}
+	
+    public static function serverTypeExist($id){
+		
+		$types = mcservers::getServerTypes();
+		if(isset($types[$id]))
+			return true;
+		else {
+			return false;
+		}
+	}
+	
+    public static function getServerType($id){
+		
+		$types = mcservers::getServerTypes();
+		return $types[$id];
+	}
+	
     public static function playerHasVoted($sid, $player){
 
 		$day = date("j");

@@ -15,3 +15,11 @@ function status(status){
 		return '<span class="label label-danger">Offline</span>';
 	}
 }
+
+function tags(tagsignal, tagname){
+	if (tagsignal == 1){
+		return '<span class="label label-primary">' + tagname + '</span>';
+	} else{
+		return;
+	}
+}
