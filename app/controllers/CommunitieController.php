@@ -19,7 +19,7 @@ class CommunitieController extends Controller {
 		$cm = DB::table('communities')->where('cm_url', '=', $name)->first();
 		if(count($cm)) {
 			$title=$cm->cm_name . " - Início";
-			return View::make('cm.index')->with('title', $title);
+			return View::make('cm.index')->with('title', $title)->with('cm', $cm);
 		} else {
 			return Redirect::to(URL::to('/comunidades'));
 		}
