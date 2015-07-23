@@ -132,6 +132,8 @@
 	</div>
 	<!-- /.container -->
 	
+</body>
+	
 	<!-- Footer -->
 	<footer>
 		<div class="container">
@@ -190,7 +192,5 @@
 	<!-- Bootstrap Core JavaScript -->
 	{{ HTML::script(URL::to('/resources/bootstrap/js/bootstrap.min.js')) }}
 	{{ HTML::script(URL::to('/resources/js/jqBootstrapValidation.js')) }}
-
-</body>
 
 </html>

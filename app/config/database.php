@@ -55,8 +55,8 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'ServerListPT',
-			'username'  => 'ServerListPT',
+			'database'  => 'serverlist',
+			'username'  => 'serverlist',
 			'password'  => 'ZDhtNAaxy4PE7Ayy',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',

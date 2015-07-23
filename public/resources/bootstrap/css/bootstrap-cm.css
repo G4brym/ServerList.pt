@@ -7204,6 +7204,7 @@ a.list-group-item-danger.active:focus {
 .panel {
   border: 1px solid #e7e7e7;
   border-width: 0 1px 4px 1px;
+  border: 0;
 }
 .panel-default .close {
   color: #555555;
@@ -7226,7 +7227,6 @@ footer {
 }
 .fw-place-within-col {
     width: 100%;
-    padding: 10px;
 }
 .background-cm {
 	background: transparent url("https://forum.divinitycraft.net/images/MyCraft/container_bg.png") repeat scroll 0% 0%;
@@ -7239,6 +7239,127 @@ footer {
     background-origin: padding-box;
     background-size: auto auto;
 }
+.carousel-item {
+	height: auto;
+}
 body {
 	background: url("https://forum.divinitycraft.net/images/background.png");
+}
+table{
+	color:#000000;
+	font-family:Verdana,Arial,Sans-Serif;
+	font-size:13px;
+}
+
+.tborder{
+	background:#000;
+	width:100%;
+	-webkit-border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topleft:3px;
+	-moz-border-radius-topright:3px;
+	border-top-left-radius:3px;
+	margin:auto auto;
+	border:1px solid #000;
+	-webkit-box-shadow:0 8px 6px -6px black;
+	-moz-box-shadow:0 8px 6px -6px black;
+	box-shadow:0 8px 6px -6px black;
+}
+
+.thead{
+	background-image:url(https://forum.divinitycraft.net/images/MyCraft/theadbg.png);
+	height:30px;
+	-webkit-border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topleft:3px;
+	-moz-border-radius-topright:3px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+	color:#ccc;
+	font-family:'Anaheim',sans-serif;
+	padding-left:10px;
+}
+
+.thead-nor{
+	background-image:url(https://forum.divinitycraft.net/images/MyCraft/theadbg.png);
+	height:30px;
+	color:#ccc;
+	padding-left:10px;
+	font-family:'Anaheim',sans-serif;
+}
+
+.thead a:link{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+.thead a:visited{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+.thead a:hover,.thead a:active{
+	color:#ffffff;
+	text-decoration:underline;
+}
+
+.tcat{
+	background:#ADCBE7 url(https://forum.divinitycraft.net/images/MyCraft/darkbg.png);
+	color:#fff;
+	font-size:12px;
+}
+
+.tcat a:link{
+	color:#fff;
+}
+
+.tcat a:visited{
+	color:#fff;
+}
+
+.tcat a:hover,.tcat a:active{
+	color:#fff;
+}
+
+.trow1{
+	background:#f9f9f9;
+}
+
+.trow2{
+	background:#f9f9f9;
+}
+
+.trow_shaded{
+	background:#ffdde0;
+}
+
+.trow_selected td{
+	background:#62A929;
+}
+
+.trow_sep{
+	background:#e5e5e5;
+	color:#000;
+	font-size:12px;
+	font-weight:bold;
+}
+
+.tfoot{
+	background:#000 url(https://forum.divinitycraft.net/images/MyCraft/theadbg.png) top left repeat-x;
+	color:#ffffff;
+}
+
+.tfoot a:link{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+.tfoot a:visited{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+.tfoot a:hover,.tfoot a:active{
+	color:#ffffff;
+	text-decoration:underline;
 }
