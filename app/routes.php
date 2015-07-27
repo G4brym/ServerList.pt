@@ -41,7 +41,7 @@ Route::group(array('domain' => 'www.serverlist.pt'), function()
 
 	Route::get('/user/{id}', 'IndexController@showUser')->where(array('id' => '[0-9]+'));
 	Route::get('/minecraft/{id}', 'IndexController@showMCServer')->where(array('id' => '[0-9]+'));
-	Route::get('/comunidades', 'IndexController@showCommunitiesList');
+	Route::get('/communities', 'IndexController@showCommunitiesList');
 
 	//posts publicos
 	Route::post('vote', array('before'=>'csrf', 'as' => 'vote', 'uses'=>'BaseController@postVote'));
@@ -95,7 +95,32 @@ Route::group(array('domain' => '{name}.serverlist.pt'), function()
 {
 	
 	Route::get('/', 'CommunitieController@showIndex');
+	Route::get('/blog', 'CommunitieController@showBlog');
+	Route::get('/blog/{pid}', 'CommunitieController@showBlogPost');
+	Route::get('/servers', 'CommunitieController@showServers');
+	Route::get('/forum', 'CommunitieController@showForum');
+	Route::get('/forum/c/{cid}', 'CommunitieController@showForumCategory');
+	Route::get('/forum/t/{tid}', 'CommunitieController@showForumTopic');
+	Route::get('/contact', 'CommunitieController@showContact');
 
+	//não se pode estar logado para poder ver 
+	Route::group(array('before' => 'guest'), function()
+	{
+		//Paginas
+		Route::get('/login', 'LoginController@showLogin');
+		Route::get('/activate', 'LoginController@showActivate');
+		Route::get('/forgot', 'LoginController@showForgot');
+		Route::get('/recovery', 'LoginController@showRecovery');
+		
+		
+		//Metodos Post
+		Route::post('login', array('before'=>'csrf', 'as' => 'login', 'uses'=>'LoginController@postLogin'));
+		Route::post('register', array('before'=>'csrf', 'as' => 'register', 'uses'=>'LoginController@postRegister'));
+		Route::post('forgot', array('before'=>'csrf', 'as' => 'forgot', 'uses'=>'LoginController@postForgot'));
+		Route::post('activate', array('before'=>'csrf', 'as' => 'activate', 'uses'=>'LoginController@postActivate'));
+		Route::post('recovery', array('before'=>'csrf', 'as' => 'recovery', 'uses'=>'LoginController@postRecovery'));
+		
+	});
 });
 
 

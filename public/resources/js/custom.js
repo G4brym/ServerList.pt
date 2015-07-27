@@ -23,3 +23,10 @@ function tags(tagsignal, tagname){
 		return;
 	}
 }
+function shortText(text, caracters){
+	if (text.length > caracters){
+		return text.substring(0, caracters) + '...';
+	} else {
+		return text;
+	}
+}

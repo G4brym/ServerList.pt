@@ -111,7 +111,7 @@ echo '
 if($page == 1){
 	echo '
 	<li class="disabled">
-      <a href="#" aria-label="Previous">
+      <a aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>';
@@ -144,7 +144,7 @@ for ($i = $page + 1; $i <= $page + 4; $i++){
 if($page == $pages){
 	echo '
 	<li class="disabled">
-      <a href="#" aria-label="Next">
+      <a aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>';

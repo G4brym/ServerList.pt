@@ -71,16 +71,16 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="{{ URL::to('/login') }}"><i class="fa fa-home"></i> Início</a>
+						<a href="{{ URL::to('/') }}"><i class="fa fa-home"></i> Início</a>
 					</li>
 					<li>
-						<a href="{{ URL::to('/login') }}"><i class="fa fa-user"></i> Blog</a>
+						<a href="{{ URL::to('/blog') }}"><i class="fa fa-user"></i> Blog</a>
 					</li>
 					<li>
-						<a href="{{ URL::to('/login') }}"><i class="fa fa-server"></i> Servidores</a>
+						<a href="{{ URL::to('/servers') }}"><i class="fa fa-server"></i> Servidores</a>
 					</li>
 					<li>
-						<a href="{{ URL::to('/login') }}"><i class="fa fa-users"></i> Forum</a>
+						<a href="{{ URL::to('/forum') }}"><i class="fa fa-users"></i> Forum</a>
 					</li>
 					@if(Auth::guest())
 					<li>
@@ -142,23 +142,23 @@
 					<p>Copyright &copy; <a href="{{ URL::to('/') }}">{{ $cm->cm_name }}</a> 2015</p>
                     <ul class="list-inline">
                         <li>
-                            <a href="#"><i class="fa fa-home"></i> Início</a>
+                            <a href="{{ URL::to('/') }}"><i class="fa fa-home"></i> Início</a>
                         </li>
                         <li class="footer-menu-divider">-</li>
                         <li>
-                            <a href="#"><i class="fa fa-user"></i> Blog</a>
+                            <a href="{{ URL::to('/blog') }}"><i class="fa fa-user"></i> Blog</a>
                         </li>
                         <li class="footer-menu-divider">-</li>
                         <li>
-                            <a href="#"><i class="fa fa-server"></i> Servidores</a>
+                            <a href="{{ URL::to('/servers') }}"><i class="fa fa-server"></i> Servidores</a>
                         </li>
                         <li class="footer-menu-divider">-</li>
                         <li>
-                            <a href="#"><i class="fa fa-users"></i> Forum</a>
+                            <a href="{{ URL::to('/forum') }}"><i class="fa fa-users"></i> Forum</a>
                         </li>
                         <li class="footer-menu-divider">-</li>
                         <li>
-                            <a href="#"><i class="fa fa-life-ring"></i> Contactar</a>
+                            <a href="{{ URL::to('/contact') }}"><i class="fa fa-life-ring"></i> Contactar</a>
                         </li>
                     </ul>
 				</div>
@@ -192,5 +192,7 @@
 	<!-- Bootstrap Core JavaScript -->
 	{{ HTML::script(URL::to('/resources/bootstrap/js/bootstrap.min.js')) }}
 	{{ HTML::script(URL::to('/resources/js/jqBootstrapValidation.js')) }}
+	
+	@yield('js')
 
 </html>
