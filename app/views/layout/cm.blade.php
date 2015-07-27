@@ -51,6 +51,7 @@
 </head>
 
 <body>
+  <div id="wrapper">
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -131,7 +132,8 @@
 
 	</div>
 	<!-- /.container -->
-	
+	<div class="push"></div>
+  </div>
 </body>
 	
 	<!-- Footer -->

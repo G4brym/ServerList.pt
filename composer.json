@@ -5,10 +5,10 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.16",
-		"greggilbert/recaptcha": "dev-master",
+		"laravel/framework": "4.2.*",
+		"greggilbert/recaptcha": "1.*",
 		"cviebrock/image-validator": "1.0.*",
-		"intervention/image": "2.*",
+		"intervention/image": "1.*",
 		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {

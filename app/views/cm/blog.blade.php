@@ -149,6 +149,12 @@ $sum = $normalPosts + $highlightedPosts;
 	</nav>
 	</center>';
 	?>
+	@else
+	<div class="alert alert-warning">
+	  <h4>Aviso</h4>
+	  <p>Ainda não temos nenhum post no blog, passa pelo nosso <a href="#" class="alert-link">Forum</a> e deixa uma mensagem aos outros membros da comunidade.</p>
+	</div>
+	@endif
 </div>
 @stop
 @section('js')
