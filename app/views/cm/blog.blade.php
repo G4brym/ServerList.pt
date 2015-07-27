@@ -19,11 +19,10 @@ if(isset($_GET["page"])){
 $skip = $page * 20 - 20;
 
 //todo
-$normalPosts = array();
-$highlightedPosts = array();
+$normalPosts = DB::table('bposts')->where('bp_cmid', '=', $cm->cm_id)->where('bp_hl', '=', 0)->get();
+$highlightedPosts = DB::table('bposts')->where('bp_cmid', '=', $cm->cm_id)->where('bp_hl', '=', 1)->get();
 
-$sum = $normalPosts + $highlightedPosts;
-
+$sum = count($normalPosts) + count($highlightedPosts);
 
 ?>
 
@@ -31,24 +30,25 @@ $sum = $normalPosts + $highlightedPosts;
 		@include('cm/sidebar')
     </div>
     <div class="col-sm-9 pull-left">
-	@if($sum === 0)
+	@if($sum != 0)
 		@foreach($highlightedPosts as $post)
 		<div class="fw-place-within-col">
 			<div class="panel panel-warning">
 			  <div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-comment"></i> post em destaque
+				<h3 class="panel-title"><i class="fa fa-comment"></i> {{ $post->bp_title }}
 					<div class ="pull-right">
-						3 horas atrás
+					{{ time::ago($post->bp_date) }}
 					</div>
 				</h3>
 			  </div>
 			  <div class="panel-body">
 				<p>
-					<script>document.write(shortText("TODO", 1000));</script>
+					<script>document.write(shortText("{{ $post->bp_text }}", 1000));</script>
 				</p>
 			  </div>
 			  <div class="panel-footer">
-				Por <a href="#">G4brym</a>
+				<?php $pcreator = User::find($post->bp_creator); ?>
+				Por <a href="{{ URL::to('/users/'.$pcreator->id) }}">{{ User::find($pcreator->id)->name }}</a>
 				<div class="pull-right">
 					<span class="label label-strong">Minijogos</span> <span class="label label-strong">Servidor</span>
 				</div>
@@ -60,30 +60,22 @@ $sum = $normalPosts + $highlightedPosts;
 		<div class="fw-place-within-col">
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-comment"></i> titulo do post do blog
+				<h3 class="panel-title"><i class="fa fa-comment"></i> {{ $post->bp_title }}
 					<div class ="pull-right">
-						3 horas atrás
+					{{ time::ago($post->bp_date) }}
 					</div>
 				</h3>
 			  </div>
 			  <div class="panel-body">
-				<p id="blogtext">
-				  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.<br>
-				  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.<br>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.
+				<p>
+					<script>document.write(shortText("{{ $post->bp_text }}", 1000));</script>
 				</p>
 			  </div>
 			  <div class="panel-footer">
-				Por <a href="#">G4brym</a>
-				<div class="pull-right">
-					<span class="label label-strong">Minijogos</span> <span class="label label-strong">Servidor</span>
+				<?php $pcreator = User::find($post->bp_creator); ?>
+				Por <a href="{{ URL::to('/users/'.$pcreator->id) }}">{{ User::find($pcreator->id)->name }}</a>
+				<div>
+					<script>document.write(getTags('{{ $post->bp_tags }}'));</script>
 				</div>
 			  </div>
 			</div>
