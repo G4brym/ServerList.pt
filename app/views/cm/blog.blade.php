@@ -42,6 +42,7 @@ $sum = count($normalPosts) + count($highlightedPosts);
 				</h3>
 			  </div>
 			  <div class="panel-body">
+			    <img style="float:left; width:100px; height:100px; margin-right:10px;" src="https://dummyimage.com/100x100/000/fff" />
 				<p>
 					<script>document.write(shortText("{{ $post->bp_text }}", 1000));</script>
 				</p>
@@ -49,9 +50,7 @@ $sum = count($normalPosts) + count($highlightedPosts);
 			  <div class="panel-footer">
 				<?php $pcreator = User::find($post->bp_creator); ?>
 				Por <a href="{{ URL::to('/users/'.$pcreator->id) }}">{{ User::find($pcreator->id)->name }}</a>
-				<div class="pull-right">
-					<span class="label label-strong">Minijogos</span> <span class="label label-strong">Servidor</span>
-				</div>
+				<div class="pull-right">{{ utilities::getTags($post->bp_tags) }} <a href="{{ URL::to('/blog/'.$post->bp_id) }}" class="btn btn-xs"><i class="fa fa-plus-square"></i> Continuar a ler</a></div>
 			  </div>
 			</div>
 		</div>
@@ -67,6 +66,7 @@ $sum = count($normalPosts) + count($highlightedPosts);
 				</h3>
 			  </div>
 			  <div class="panel-body">
+			    <img style="float:left; width:100px; height:100px; margin-right:10px;" src="https://dummyimage.com/100x100/000/fff" />
 				<p>
 					<script>document.write(shortText("{{ $post->bp_text }}", 1000));</script>
 				</p>
@@ -74,9 +74,7 @@ $sum = count($normalPosts) + count($highlightedPosts);
 			  <div class="panel-footer">
 				<?php $pcreator = User::find($post->bp_creator); ?>
 				Por <a href="{{ URL::to('/users/'.$pcreator->id) }}">{{ User::find($pcreator->id)->name }}</a>
-				<div>
-					<script>document.write(getTags('{{ $post->bp_tags }}'));</script>
-				</div>
+				<div class="pull-right">{{ utilities::getTags($post->bp_tags) }} <a href="{{ URL::to('/blog/'.$post->bp_id) }}" class="btn btn-xs"><i class="fa fa-plus-square"></i> Continuar a ler</a></div>
 			  </div>
 			</div>
 		</div>
@@ -148,10 +146,9 @@ $sum = count($normalPosts) + count($highlightedPosts);
 	</div>
 	@endif
 </div>
-@stop
-@section('js')
-<script>
-var longText = $('#blogtext1');
-longText.text(longText.text().substr(0, 30));
+<script data-cfasync="false">
+function writeTags(element, tags){
+	document.getElementById(element).innerHTML = getTags(tags);
+}
 </script>
 @stop

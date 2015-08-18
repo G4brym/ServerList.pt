@@ -42,6 +42,17 @@ Class utilities {
 
     }
 	
+    public static function getTags($tags){
+
+		$data = json_decode($tags,true);
+		$result = "";
+		foreach($data as $tag){
+			$result = $result . '<span class="label label-primary">' . $tag . '</span> ';
+		}
+
+		return $result;
+    }
+	
     public static function MCSVhasBanner($id){
 		
 		if(file_exists(public_path()."/resources/images/minecraft/banners/".$id.".png") || file_exists(public_path()."/resources/images/minecraft/banners/".$id.".jpg") || file_exists(public_path()."/resources/images/minecraft/banners/".$id.".gif")){

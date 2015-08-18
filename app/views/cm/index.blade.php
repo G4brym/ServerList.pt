@@ -1,5 +1,14 @@
 @extends('layout.cm')
 @section('body')
+<?php
+$posts = DB::table('bposts')->where('bp_cmid', '=', $cm->cm_id)->count();
+
+//todo
+$normalPosts = DB::table('bposts')->where('bp_cmid', '=', $cm->cm_id)->where('bp_hl', '=', 0)->get();
+$highlightedPosts = DB::table('bposts')->where('bp_cmid', '=', $cm->cm_id)->where('bp_hl', '=', 1)->get();
+
+$sum = count($normalPosts) + count($highlightedPosts);
+?>
 <div style="padding: 10px;">
 	<div id="myCarousel" class="carousel slide carousel-image" data-ride="carousel">
 	  <!-- Indicators -->
@@ -45,93 +54,54 @@
 		@include('cm/sidebar')
     </div>
     <div class="col-sm-9 pull-left">
+		@foreach($highlightedPosts as $post)
 		<div class="fw-place-within-col">
-			<div class="panel panel-primary">
+			<div class="panel panel-warning">
 			  <div class="panel-heading">
-				<h3 class="panel-title">titulo do post do blog
+				<h3 class="panel-title"><i class="fa fa-comment"></i> {{ $post->bp_title }}
 					<div class ="pull-right">
-						3 horas atrás
+					{{ time::ago($post->bp_date) }}
 					</div>
 				</h3>
 			  </div>
 			  <div class="panel-body">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
+			    <img style="float:left; width:100px; height:100px; margin-right:10px;" src="https://dummyimage.com/100x100/000/fff" />
+				<p>
+					<script>document.write(shortText("{{ $post->bp_text }}", 1000));</script>
+				</p>
 			  </div>
 			  <div class="panel-footer">
-				Por <a href="#">G4brym</a>
-				<div class="pull-right">
-					<span class="label label-strong">Minijogos</span> <span class="label label-strong">Servidor</span>
-				</div>
+				<?php $pcreator = User::find($post->bp_creator); ?>
+				Por <a href="{{ URL::to('/users/'.$pcreator->id) }}">{{ User::find($pcreator->id)->name }}</a>
+				<div class="pull-right">{{ utilities::getTags($post->bp_tags) }} <a href="{{ URL::to('/blog/'.$post->bp_id) }}" class="btn btn-xs"><i class="fa fa-plus-square"></i> Continuar a ler</a></div>
 			  </div>
 			</div>
 		</div>
+		@endforeach
+		@foreach($normalPosts as $post)
 		<div class="fw-place-within-col">
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
-				<h3 class="panel-title">titulo do post do blog
+				<h3 class="panel-title"><i class="fa fa-comment"></i> {{ $post->bp_title }}
 					<div class ="pull-right">
-						3 horas atrás
+					{{ time::ago($post->bp_date) }}
 					</div>
 				</h3>
 			  </div>
 			  <div class="panel-body">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
+			    <img style="float:left; width:100px; height:100px; margin-right:10px;" src="https://dummyimage.com/100x100/000/fff" />
+				<p>
+					<script>document.write(shortText("{{ $post->bp_text }}", 1000));</script>
+				</p>
 			  </div>
 			  <div class="panel-footer">
-				Por <a href="#">G4brym</a>
-				<div class="pull-right">
-					<span class="label label-strong">Minijogos</span> <span class="label label-strong">Servidor</span>
-				</div>
+				<?php $pcreator = User::find($post->bp_creator); ?>
+				Por <a href="{{ URL::to('/users/'.$pcreator->id) }}">{{ User::find($pcreator->id)->name }}</a>
+				<div class="pull-right">{{ utilities::getTags($post->bp_tags) }} <a href="{{ URL::to('/blog/'.$post->bp_id) }}" class="btn btn-xs"><i class="fa fa-plus-square"></i> Continuar a ler</a></div>
 			  </div>
 			</div>
 		</div>
-		<div class="fw-place-within-col">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">
-				<h3 class="panel-title">titulo do post do blog
-					<div class ="pull-right">
-						3 horas atrás
-					</div>
-				</h3>
-			  </div>
-			  <div class="panel-body">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				  incididunt ut labore et dolore magna aliqua.</p>
-			  </div>
-			  <div class="panel-footer">
-				Por <a href="#">G4brym</a>
-				<div class="pull-right">
-					<span class="label label-strong">Minijogos</span> <span class="label label-strong">Servidor</span>
-				</div>
-			  </div>
-			</div>
-		</div>
+		@endforeach
 		<center><a href="{{ URL::to('/blog') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Ver Mais Posts</a></center>
 		<br>
 	</div>

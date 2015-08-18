@@ -30,11 +30,3 @@ function shortText(text, caracters){
 		return text;
 	}
 }
-function getTags(tags){
-	tags = JSON.parse(tags);
-	text = "";
-	for (i = 0; i < tags.length; i++) {
-		text += '<span class="label label-strong">' + tags[i] + '</span>&nbsp';
-	}
-	return text;
-}
