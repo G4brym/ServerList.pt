@@ -10,3 +10,6 @@ In this Repo you will find
 4. Google nocaptcha on login and register
 
 To run the code you will need to import the database.sql and modify it, because i was developing in the production server and i lost it, all i got was the source code you can see here and an old exported sql file, soo good luck debuging it xD
+
+### Preview
+[logo]: https://raw.githubusercontent.com/G4brym/ServerList.pt/master/preview.jpg "preview"
